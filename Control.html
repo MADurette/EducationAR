@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Control</title>
+	<link rel="shortcut icon" href="" type="image/x-icon">
+	<link rel="stylesheet" href="CSS/ARControl.css">
+</head>
+<body>
+<div>
+<form action="/ModelUpload.php">
+  <p>Marker Upload</p>
+  <input type="file" id="MarkUpbtn" name="Marker">
+  <br>
+  <p>Model Upload</p>
+  <input type="file" id="ModUpbtn" name="Model">
+  <input type="submit" value="Upload">
+</form>
+<div>
+<div>
+<form>
+<div class="row">
+<p>Rotation</p>
+<input type="checkbox">
+</div>
+
+<div class="slidecontainer">
+  <input type="range" min="0" max="100" value="50" class="slider" id="Rotation">
+</div>
+
+<div>
+<p id="RotValue"></p>
+</div>
+
+<div class="row">
+<input id="Controlbtn" type="button" value="Take Control" onclick="Control()">
+</div>
+
+</form>
+</div>
+
+</body>
+<script src="JS/Control.js"></script>
