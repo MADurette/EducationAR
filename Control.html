@@ -7,36 +7,73 @@
 </head>
 <body>
 <div>
-<form action="/ModelUpload.php">
-  <p>Marker Upload</p>
-  <input type="file" id="MarkUpbtn" name="Marker">
-  <br>
-  <p>Model Upload</p>
-  <input type="file" id="ModUpbtn" name="Model">
-  <input type="submit" value="Upload">
-</form>
-<div>
-<div>
 <form>
-<div class="row">
+  <p>Marker Select</p>
+  <div>
+    <select>
+      <option selected="">Select Marker</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+  <br><br>
+  <p>Model Select</p>
+  <div>
+    <select>
+      <option selected="">Select Model</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+  <br><br>
+  <div class="row centered">
+  <p>Animation</p>
+  <input type="checkbox">
+  </div>
+  <div>
+    <select>
+      <option selected="">Select Animation</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </div>
+<div>
+<div>
+
+<br>
+
+<div class="row centered">
 <p>Rotation</p>
 <input type="checkbox">
 </div>
 
 <div class="slidecontainer">
-  <input type="range" min="0" max="100" value="50" class="slider" id="Rotation">
+  <input type="range" min="0" max="60" value="1" class="slider" id="Rotation">
 </div>
 
-<div>
-<p id="RotValue"></p>
+<div class="row centered">
+<b><p id="RotValue"></p></b>
+<p style="margin-left:10px;">Rotations Per Minute</p>
 </div>
 
-<div class="row">
+<br>
+
+<div class="row centered">
 <input id="Controlbtn" type="button" value="Take Control" onclick="Control()">
+</div>
+
+<br><br><br>
+
+<div class="centered">
+<input type="submit" value="Submit">
 </div>
 
 </form>
 </div>
+
 
 </body>
 <script src="JS/Control.js"></script>

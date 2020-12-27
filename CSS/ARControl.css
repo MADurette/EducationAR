@@ -1,8 +1,6 @@
-
-div{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body{
+	margin:auto;
+	text-align:center;
 }
 
 input[type=checkbox]{
