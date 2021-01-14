@@ -11,7 +11,7 @@
     <body style="margin : 0px; overflow: hidden;">
         <a-scene embedded arjs>
 		<a-marker preset="hiro">
-            <a-sphere position="0 1 0" radius="0.5" material="color: red"><a-animation attribute="position" from="-100 -100 -100" to="100 100 100 "
+            <a-sphere position="0 1 0" radius="0.5" material="color: red"><a-animation attribute="material.color" from="red" to="purple" dur="1000"
                repeat="indefinite"></a-animation></a-sphere>
         </a-marker>
         <a-entity camera></a-entity>
