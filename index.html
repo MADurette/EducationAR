@@ -85,12 +85,10 @@
 			<img id="texture" src="Markers/Imgs/BaseBinary-HexProblem1.png">
 		</a-assets>
         <a-scene arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;" embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
-		<a-nft type="nft" url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex" smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
 		<a-marker preset="hiro">
               <a-box src="#texture" depth="2" height=".1" width="2"></a-box>
         </a-marker>
         <a-entity camera gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf" scale="5 5 5" position="50 150 0" class="clickable" gesture-handler="minScale: 0.25; maxScale: 10"></a-entity>
-        </a-nft>
 		</a-scene>
     </body>
 </html>
