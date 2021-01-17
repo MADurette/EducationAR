@@ -19,42 +19,6 @@
         });
     };
 	
-	sceneEl.addEventListener("onefingermove", handleRotation);
-	sceneEl.addEventListener("twofingermove", handleScale);
-	
-	sceneEl.addEventListener("markerFound", (e) => {
-		isMarkerVisible = true;
-	});
-
-	sceneEl.addEventListener("markerLost", (e) => {
-		isMarkerVisible = false;
-	});
-	
-	handleRotation(event) {
-    if (isMarkerVisible) {
-      el.object3D.rotation.y +=
-        event.detail.positionChange.x * rotationFactor;
-
-      el.object3D.rotation.x +=
-        event.detail.positionChange.y * rotationFactor;
-    }
-	}
-	
-	handleScale(event) {
-    if (isMarkerVisible) {
-      this.scaleFactor *=
-        1 + event.detail.spreadChange / event.detail.startSpread;
-
-      this.scaleFactor = Math.min(
-        Math.max(this.scaleFactor, this.data.minScale),
-        this.data.maxScale
-      );
-
-      el.object3D.scale.x = scaleFactor * initialScale.x;
-      el.object3D.scale.y = scaleFactor * initialScale.y;
-      el.object3D.scale.z = scaleFactor * initialScale.z;
-    }
-	}
   </script>
   <style>
     .buttons {
@@ -89,7 +53,7 @@
 		</a-assets>
         <a-scene  arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
 		<a-marker preset="hiro">
-              <a-box src="#texture" class="clickable" gesture-handler="minScale: 0.25; maxScale:10;" depth="2" height=".1" width="2"></a-box>
+              <a-box src="#texture" depth="2" height=".1" width="2"></a-box>
         </a-marker>
         <a-entity camera></a-entity>
         </a-scene>
