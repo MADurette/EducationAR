@@ -7,8 +7,23 @@
     <script src="Frameworks/Aframe.min.js"></script>
     <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="Frameworks/Aframe-ar.js"></script>
+	<script>
+    window.onload = function () {
+      document
+        .querySelector(".say-hi-button")
+        .addEventListener("click", function () {
+          // here you can change also a-scene or a-entity properties, like
+          // changing your 3D model source, size, position and so on
+          // or you can just open links, trigger actions...
+          alert("Hi there!");
+        });
+    };
+  </script>
 	</head>
     <body style="margin : 0px; overflow: hidden;">
+	<div class="buttons">
+      <button class="say-hi-button">SAY HI!</button>
+    </div>
 		<a-assets>
 			<img id="texture" src="Markers/Imgs/BaseBinary-HexProblem1.png">
 		</a-assets>
