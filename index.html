@@ -54,7 +54,7 @@
 		</a-assets>
         <a-scene arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
 		<a-marker preset="hiro" raycaster="objects: .clickable"  emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerA">
-              <a-plane src="#texture1" class="clickable" gesture-handler height="2" width="2" rotation="-90 0 0"></a-plane>
+              <a-plane src="#texture1" transparent="false" class="clickable" gesture-handler height="2" width="2" rotation="-90 0 0"></a-plane>
         </a-marker>
         <a-entity camera></a-entity>
         </a-scene>
