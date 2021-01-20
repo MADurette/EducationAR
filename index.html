@@ -59,7 +59,7 @@
 		</a-assets>
         <a-scene arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
 		<a-marker preset="hiro" raycaster="objects: .clickable"  emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerA">
-              <a-entity geometry="primitive:box;depth:2;height:.01;width:2;" material="color:black;src:#fronttexture;" class="clickable" gesture-handler></a-entity>
+              <a-entity geometry="primitive:box;depth:2;height:.01;width:2;" material="src:#fronttexture;" class="clickable" gesture-handler></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
         </a-scene>
