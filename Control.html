@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>Control</title>
-	<link rel="shortcut icon" href="" type="image/x-icon">
-	<link rel="stylesheet" href="CSS/ARControl.css">
-</head>
-<body>
-<div>
-<form>
-  <p>Marker Select</p>
-  <div>
-    <select>
-      <option selected="">Select Marker</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  <br><br>
-  <p>Model Select</p>
-  <div>
-    <select>
-      <option selected="">Select Model</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  <br><br>
-  <div class="row centered">
-  <p>Animation</p>
-  <input type="checkbox">
-  </div>
-  <div>
-    <select>
-      <option selected="">Select Animation</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-<div>
-<div>
-
-<br>
-
-<div class="row centered">
-<p>Rotation</p>
-<input type="checkbox">
-</div>
-
-<div class="slidecontainer">
-  <input type="range" min="0" max="60" value="1" class="slider" id="Rotation">
-</div>
-
-<div class="row centered">
-<b><p id="RotValue"></p></b>
-<p style="margin-left:10px;">Rotations Per Minute</p>
-</div>
-
-<br>
-
-<div class="row centered">
-<input id="Controlbtn" type="button" value="Take Control" onclick="Control()">
-</div>
-
-<br><br><br>
-
-<div class="centered">
-<input type="submit" value="Submit">
-</div>
-
-</form>
-</div>
-
-
-</body>
-<script src="JS/Control.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <title>Control</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/ARControl.css">
+    <script src="JS/Control.js" async></script>
+  </head>
+  <body>
+    <div>
+      <form>
+        <!--MARKER SELECT OPTION-->
+        <div>
+          <p>Marker Select</p>
+          <select>
+            <option selected="">Select Marker</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <br><br>
+        <!--MODEL SELECT OPTION-->
+        <div>
+          <p>Model Select</p>
+          <select>
+            <option selected="">Select Model</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <br><br>
+        <!--ANIMATION SELECT OPTION-->
+        <div class="row centered">
+          <p>Animation</p>
+          <input type="checkbox">
+        </div>
+        <div>
+          <select>
+            <option selected="">Select Animation</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <!--ROTATION CONTROL-->
+        <div>
+          <div>
+            <br><br>
+            <div class="row centered">
+              <p>Rotation</p>
+              <input type="checkbox">
+            </div>
+            <div class="slidecontainer">
+              <input type="range" min="0" max="60" value="1" class="slider"
+                id="Rotation">
+            </div>
+            <div class="row centered">
+              <b><p id="RotValue"></p></b>
+              <p style="margin-left:10px;">Rotations Per Minute</p>
+            </div>
+          </div>
+        </div>
+          <br><br>
+          <!--CONTROL OPTIONS-->
+          <div class="row centered">
+            <input id="Controlbtn" type="button" value="Take Control"
+              onclick="Control()">
+          </div>
+          <br><br>
+          <div class="centered">
+            <input type="submit" value="Submit">
+          </div>
+      </form>
+    </div>
+  </body>
+</html>
