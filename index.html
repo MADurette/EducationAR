@@ -50,18 +50,11 @@
       <button class="hint-button">Hints</button>
     </div>
 		<a-assets>
-		<a-cubemap id="texture">
-			<img src="Markers/Imgs/BaseBinary-HexProblem1.png">
-			<img src="Marker/Img/TransparentIMG.png">
-			<img src="Marker/Img/TransparentIMG.png">
-			<img src="Marker/Img/TransparentIMG.png">
-			<img src="Marker/Img/TransparentIMG.png">
-			<img src="Marker/Img/TransparentIMG.png">
-		</a-cubemap>
+			<img id="texture1" src="Markers/Imgs/BaseBinary-HexProblem1.png">
 		</a-assets>
         <a-scene arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
 		<a-marker preset="hiro" raycaster="objects: .clickable"  emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerA">
-              <a-box material="envmap:#texture; roughness:0;" class="clickable" gesture-handler depth="2" height=".1" width="2"></a-box>
+              <a-plane src="#texture1" class="clickable" gesture-handler height="2" width="2"></a-box>
         </a-marker>
         <a-entity camera></a-entity>
         </a-scene>
