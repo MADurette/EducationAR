@@ -45,7 +45,7 @@
 			<img id="Modeltexture" src="Materials/Imgs/BaseBinary-HexProblem1.png" style="width:100%;">
 			<a-asset-item id="dna-obj" src="Materials/Models/dna.obj"></a-asset-item>
 		</a-assets>
-        <a-scene embedded arjs="sourceType: webcam; patternRatio: 0.75 trackingMethod: best maxDetectionRate: 60 detectionMode: mono" renderer="antialias: true; alpha: true; precision: medium; logarithmicDepthBuffer: true;" stats vr-mode-ui="enabled: false" gesture-detector id="scene">
+        <a-scene embedded arjs="sourceType: webcam; patternRatio: 0.75 trackingMethod: best maxDetectionRate: 60 detectionMode: mono" renderer="antialias: true; alpha: true; precision: medium; logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false;" gesture-detector id="scene">
 		<!-- Marker T is the marker for Pictures with tasks-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-T.patt" id="markerT">
               <a-entity geometry="primitive:plane;height:2;width:2;" position="2 0 .5" rotation="-90 0 0" material="src:#Tasktexture;shader:flat;"></a-entity>
