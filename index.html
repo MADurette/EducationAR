@@ -66,6 +66,7 @@
               <a-entity geometry="primitive:plane;height:2;width:2;" position="-2 0 -.5" rotation="-90 0 0" material="src:#Answertexture;shader:flat;"></a-entity>
         </a-marker>
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-M.patt" raycaster="objects: .clickable"  emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerM">
+              <a-entity geometry="primitive:box;depth:2;height:2;width:2;" class="clickable" gesture-handler></a-entity>
 			  <a-entity obj-model="obj: #dna-obj;" class="clickable" gesture-handler></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
