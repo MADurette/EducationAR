@@ -57,7 +57,7 @@
         </a-marker>
 		<!-- Marker M is the marker for Models and Helpful Infographics-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-M.patt" raycaster="objects: .clickable"  emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerM">
-			  <a-entity mixin="normal" obj-model="obj: #dna-obj;" class="clickable" gesture-handler></a-entity>
+			  <a-entity mixin="normal" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000" obj-model="obj: #dna-obj;" class="clickable" gesture-handler></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
         </a-scene>
