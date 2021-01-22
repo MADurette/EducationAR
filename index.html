@@ -33,16 +33,6 @@
       align-items: center;
       z-index: 10;
     }
-
-    .say-hi-button {
-      padding: 0.25em;
-      border-radius: 4px;
-      border: none;
-      background: white;
-      color: black;
-      width: 4em;
-      height: 2em;
-    }
   </style>
 	</head>
     <body style="margin : 0px; overflow: hidden;">
@@ -56,15 +46,15 @@
 			<a-asset-item id="dna-obj" src="Materials/Models/dna.obj"></a-asset-item>
 		</a-assets>
         <a-scene arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
-		<!--<a-marker type="pattern" url="Markers/MarkerFile/pattern-AnswerImg.patt">
-              <a-entity geometry="primitive:box;depth:2;height:.01;width:2;" position="-1 0 -2" material="src:#backtexture;" class="clickable" gesture-handler></a-entity>
-        </a-marker>-->
+		<!-- Marker T is the marker for Pictures with tasks-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-T.patt" id="markerT">
               <a-entity geometry="primitive:plane;height:2;width:2;" position="2 0 .5" rotation="-90 0 0" material="src:#Tasktexture;shader:flat;"></a-entity>
         </a-marker>
+		<!-- Marker A is the marker for Pictures with Answers or Hints-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-A.patt" id="markerA">
               <a-entity geometry="primitive:plane;height:2;width:2;" position="-2 0 -.5" rotation="-90 0 0" material="src:#Answertexture;shader:flat;"></a-entity>
         </a-marker>
+		<!-- Marker M is the marker for Models and Helpful Infographics-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-M.patt" raycaster="objects: .clickable"  emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerM">
               <a-entity geometry="primitive:sphere;radius:.1;" color="black" class="clickable" gesture-handler></a-entity>
 			  <a-entity obj-model="obj: #dna-obj;" class="clickable" gesture-handler></a-entity>
