@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>ARPS: Instructor Control Panel</title>
+        <link rel="shortcut icon" href="" type="image/x-icon">
+        <link rel="stylesheet" href="CSS/bootstrap.min.css">
+        <link rel="stylesheet" href="CSS/controlT.css">
+        <script src="JS/Control.js" async></script>
+    </head>
+    <body>
+        <!--TOP "instructor control panel" BAR-->
+        <div class="container-fluid" id="topBar">
+            <h4>ARPS: Instructor Control Panel</h4>
+        </div>
+        <!--DEMO NOTFICICATION-->
+        <div class="container-fluid" id="placeholderNote">
+            <p><b>!!!Attention, this is a placeholder demo of the instructor
+                    control panel!!!</b></p>
+            <p><b>!!!Any feedback is greatly appreciated and will be
+                    considered!!!</b></p>
+        </div>
+        <!--MAIN WORKSPACE OF CONTROL PANEL INCLUDES
+            1) LEFTHAND CONTROL PANEL
+            2) "TOP" TASK & ANSWER MARKER CONTROL AREAS
+            3) RIGHTHAND CONTROL PANEL
+            4) "BOTTOM" MODEL MARKER CONTROL AREA-->
+        <div class="container-fluid h-100" id="mainWorkspaceDiv">
+            <div class="row" id="mainWorkspace">
+                <div class="col-sm-2 align-self-center" id="leftControl">
+                    <div class="jumbotron">
+                        <h1>This is the left end controls area</h1>
+                    </div>
+                </div>
+                <div class="col-sm-8 align-self-center" id="markerSpace">
+                    <div class="row" id="topMarkers">
+                        <div class="col-sm-6 align-self-center" id="tMarker">
+                            <div class="jumbotron">
+                                <h1>This is the T marker area</h1>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 align-self-center" id="aMarker">
+                            <div class="jumbotron">
+                                <h1>This is the A marker area</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 align-self-center" id="mMarker">
+                            <div class="jumbotron">
+                                <h1>This is the M marker area</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 align-self-center" id="rightControl">
+                    <div class="jumbotron">
+                        <h1>This is the right controls area</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

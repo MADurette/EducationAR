@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#topBar {
+    text-align: center;
+    background-color: rgb(153, 153, 153);
+}
+
+#placeholderNote {
+    text-align: center;
+    background-color: red;
+}
+
+h4 {
+    margin-bottom: 0;
+}
+
+#leftControl, #markerSpace, #rightControl {
+    text-align: center;
+}
+
+.row {
+    height: 100%;
+}
