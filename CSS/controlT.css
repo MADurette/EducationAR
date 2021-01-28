@@ -25,3 +25,16 @@ h4 {
 .row {
     height: 100%;
 }
+
+#tMarkButtons, #aMarkButtons, #mMarkButtons {
+    position: absolute;
+    bottom: 40px;
+    left: 15px;
+}
+
+#tAreaHeader, #aAreaHeader {
+    position: absolute;
+    top: 10px;
+    margin-bottom: 0;
+}
+

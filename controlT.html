@@ -7,10 +7,10 @@
         <link rel="shortcut icon" href="" type="image/x-icon">
         <link rel="stylesheet" href="CSS/bootstrap.min.css">
         <link rel="stylesheet" href="CSS/controlT.css">
-        <script src="JS/Control.js" async></script>
+        <script src="JS/controlT.js" async></script>
     </head>
     <body>
-        <!--TOP "instructor control panel" BAR-->
+        <!--TOP "ARPS: INSTRUCTOR CONTROL PANEL" BAR-->
         <div class="container-fluid" id="topBar">
             <h4>ARPS: Instructor Control Panel</h4>
         </div>
@@ -21,45 +21,122 @@
             <p><b>!!!Any feedback is greatly appreciated and will be
                     considered!!!</b></p>
         </div>
+        <div class="container" id="separator" style="margin-bottom: 2%;">
+        </div>
         <!--MAIN WORKSPACE OF CONTROL PANEL INCLUDES
             1) LEFTHAND CONTROL PANEL
             2) "TOP" TASK & ANSWER MARKER CONTROL AREAS
             3) RIGHTHAND CONTROL PANEL
             4) "BOTTOM" MODEL MARKER CONTROL AREA-->
-        <div class="container-fluid h-100" id="mainWorkspaceDiv">
-            <div class="row" id="mainWorkspace">
-                <div class="col-sm-2 align-self-center" id="leftControl">
-                    <div class="jumbotron">
-                        <h1>This is the left end controls area</h1>
-                    </div>
-                </div>
-                <div class="col-sm-8 align-self-center" id="markerSpace">
-                    <div class="row" id="topMarkers">
-                        <div class="col-sm-6 align-self-center" id="tMarker">
-                            <div class="jumbotron">
-                                <h1>This is the T marker area</h1>
+        <form>
+            <div class="container-fluid h-100" id="mainWorkspaceDiv">
+                <div class="row" id="mainWorkspace">
+                    <div class="col-sm-2 align-self-center" id="leftControl">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Task & Answer Control</h6>
+                            </div>
+                            <div class="card-body">
+                                <p><b>Display Task:</b></p>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
+                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
+                                </div>
+                                <p>ON</p>
+                                
+                                <p><b>Task Position:</b></p>
+                                <div class="slidecontainer">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisTask">
+                                </div>
+                                <div class="container-fluid">
+                                    <p id="xValTask"></p>
+                                    <p id="yValTask"></p>
+                                </div>
+                                <p><b>Display Answer:</b></p>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
+                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
+                                </div>
+                                <p>OFF</p>
+
+                                <p><b>Answer Position:</b></p>
+                                <div class="slidecontainer">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisAns">
+                                </div>
+                                <div class="container-fluid">
+                                    <p id="xValAns"></p>
+                                    <p id="yValAns"></p>
+                                </div>
+                                <input type="button" class="btn btn-success" id="tASubmit" value="Submit">
                             </div>
                         </div>
-                        <div class="col-sm-6 align-self-center" id="aMarker">
-                            <div class="jumbotron">
-                                <h1>This is the A marker area</h1>
+                    </div>
+                    <div class="col-sm-8 align-self-center" id="markerSpace">
+                        <div class="row" id="topMarkers">
+                            <div class="col-sm-6 align-self-center" id="tMarker">
+                                <div class="jumbotron">
+                                    <h6 id="tAreaHeader">TASK MARKER AREA</h6>
+                                    <img src="Materials/Imgs/BaseBinary-HexProblem1.png" width="300">
+                                    <div class="btn btn-group" id=tMarkButtons>
+                                            <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
+                                            <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 align-self-center" id="aMarker">
+                                <div class="jumbotron">
+                                    <h6 id="aAreaHeader">ANSWER MARKER AREA</h6>
+                                    <img src="Materials/Imgs/BaseBinary-HexProblem1TransparentANS.png" width="300">
+                                    <div class="btn btn-group" id=aMarkButtons>
+                                        <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
+                                        <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 align-self-center" id="mMarker">
+                                <div class="jumbotron">
+                                    <h1>MODEL MARKER AREA</h1>
+                                    <h3>No file selected</h3>
+                                    <div class="btn btn-group" id=mMarkButtons>
+                                        <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
+                                        <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 align-self-center" id="mMarker">
-                            <div class="jumbotron">
-                                <h1>This is the M marker area</h1>
+                    <div class="col-sm-2 align-self-center" id="rightControl">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Model Control</h6>
+                            </div>
+                            <div class="card-body">
+                                <p><b>Display:</b></p>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
+                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
+                                </div>
+                                <p>OFF</p>
+
+                                <p><b>Model Position:</b></p>
+                                <div class="slidecontainer">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisMod">
+                                </div>
+                                <div class="container-fluid">
+                                    <p id="xValMod"></p>
+                                    <p id="yValMod"></p>
+                                </div>
+                                <input type="button" class="btn btn-success" id="tASubmit" value="Submit">
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 align-self-center" id="rightControl">
-                    <div class="jumbotron">
-                        <h1>This is the right controls area</h1>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </body>
 </html>
