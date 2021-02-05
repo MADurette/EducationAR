@@ -65,11 +65,9 @@
         
         function run () {
           if(AFRAME.utils.device.isMobile()) {
-            document.querySelector('#splash').style.display = 'flex';
-            document.querySelector('#splash').addEventListener('loadstart', function () {
+            document.querySelector('#splash').style.display = 'flex'; 
               playVideo();
               this.style.display = 'none';
-            })
           } else {
               playVideo();
           }
