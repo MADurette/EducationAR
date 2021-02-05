@@ -32,23 +32,6 @@
       align-items: center;
       z-index: 10;
     }
-	
-	#splash {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-        align-items: center;
-        justify-content: center;
-        
-        background: rgba(0, 0, 0, 1);
-        color: white;
-        cursor: pointer;
-        z-index: 999;
-      }
   </style>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <script>
@@ -82,12 +65,9 @@
       })
     </script>
 	</head>
-    <body style="margin : 0px; overflow: hidden;">
+    <body style="margin : 0px; overflow: hidden;" onload="run()">
 	<div class="buttons">
       <button class="hint-button" style="display:none;">Hints</button>
-    </div>
-	<div id="splash">
-      <div id="start-button">Start</div>
     </div>
 		<a-assets>
 			<img id="Tasktexture" src="Materials/Imgs/BaseBinary-HexProblem1Transparent.png" style="width:100%;">
