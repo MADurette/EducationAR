@@ -65,9 +65,11 @@
         
         function run () {
           if(AFRAME.utils.device.isMobile()) {
-            document.querySelector('#splash').style.display = 'flex'; 
+            document.querySelector('#splash').style.display = 'flex';
+            document.querySelector('#splash').addEventListener('click', function () {
               playVideo();
               this.style.display = 'none';
+            })
           } else {
               playVideo();
           }
@@ -85,7 +87,7 @@
       <button class="hint-button" style="display:none;">Hints</button>
     </div>
 	<div id="splash">
-      <div id="start-button"></div>
+      <div id="start-button">Click</div>
     </div>
 		<a-assets>
 			<img id="Tasktexture" src="Materials/Imgs/BaseBinary-HexProblem1Transparent.png" style="width:100%;">
