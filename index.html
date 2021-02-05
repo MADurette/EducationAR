@@ -33,6 +33,7 @@
       z-index: 10;
     }
   </style>
+  <meta name="apple-mobile-web-app-capable" content="yes">
 	</head>
     <body style="margin : 0px; overflow: hidden;">
 	<div class="buttons">
@@ -53,7 +54,7 @@
         </a-marker>
 		<!-- Marker A is the marker for Pictures with Answers or Hints-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-A.patt" id="markerA">
-              <a-video src="#Prerecordedvid" width="3" height="3" position="0 0 0" rotation="-90 0 0"></a-video>
+              <a-video src="#Prerecordedvid" width="3" height="3" position="0 0 0" rotation="-90 0 0" webkit-playsinline playsinline></a-video>
         </a-marker>
 		<!-- Marker M is the marker for Models and Helpful Infographics-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-M.patt" raycaster="objects: .clickable"  emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerM">
