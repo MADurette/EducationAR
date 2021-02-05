@@ -44,7 +44,7 @@
         align-items: center;
         justify-content: center;
         
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 1);
         color: white;
         cursor: pointer;
         z-index: 999;
@@ -66,7 +66,7 @@
         function run () {
           if(AFRAME.utils.device.isMobile()) {
             document.querySelector('#splash').style.display = 'flex';
-            document.querySelector('#splash').addEventListener('click', function () {
+            document.querySelector('#splash').addEventListener('load', function () {
               playVideo();
               this.style.display = 'none';
             })
