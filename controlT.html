@@ -38,12 +38,8 @@
                             </div>
                             <div class="card-body">
                                 <p><b>Display Task:</b></p>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
-                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
-                                </div>
-                                <p>ON</p>
-                                
+                                <input onclick="displayTaskToggle()" type="button" class="btn btn-danger" id="taskToggle" value="Off">
+                                <p></p>
                                 <p><b>Task Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask">
@@ -54,12 +50,8 @@
                                     <p id="yValTask"></p>
                                 </div>
                                 <p><b>Display Answer:</b></p>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
-                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
-                                </div>
-                                <p>OFF</p>
-
+                                <input onclick="displayAnswerToggle()" type="button" class="btn btn-danger" id="answerToggle" value="Off">
+                                <p></p>
                                 <p><b>Answer Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns">
@@ -80,8 +72,8 @@
                                     <h6 id="tAreaHeader">TASK MARKER AREA</h6>
                                     <img src="Materials/Imgs/BaseBinary-HexProblem1.png" width="300">
                                     <div class="btn btn-group" id=tMarkButtons>
-                                            <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
-                                            <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                        <span class="btn btn-primary btn-file">Choose File<input type="file" id="taskMarkChooseFile"></span>
+                                        <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +82,7 @@
                                     <h6 id="aAreaHeader">ANSWER MARKER AREA</h6>
                                     <img src="Materials/Imgs/BaseBinary-HexProblem1TransparentANS.png" width="300">
                                     <div class="btn btn-group" id=aMarkButtons>
-                                        <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
+                                        <span class="btn btn-primary btn-file">Choose File<input type="file" id="ansMarkChooseFile"></span>
                                         <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
                                     </div>
                                 </div>
@@ -102,7 +94,7 @@
                                     <h1>MODEL MARKER AREA</h1>
                                     <h3>No file selected</h3>
                                     <div class="btn btn-group" id=mMarkButtons>
-                                        <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
+                                        <span class="btn btn-primary btn-file">Choose File<input type="file" id="modMarkChooseFile"></span>
                                         <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
                                     </div>
                                 </div>
@@ -116,12 +108,8 @@
                             </div>
                             <div class="card-body">
                                 <p><b>Display:</b></p>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
-                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
-                                </div>
-                                <p>OFF</p>
-
+                                <input onclick="displayModelToggle()" type="button" class="btn btn-danger" id="modelToggle" value="Off">
+                                <p></p>
                                 <p><b>Model Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod">

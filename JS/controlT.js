@@ -1,17 +1,5 @@
-/*
-var control = false
-
-function Control(){
-	control = !control;
-	if(control == true){
-		document.getElementById("Controlbtn").value = "Stop Control";
-	}else{
-		document.getElementById("Controlbtn").value = "Take Control";
-	}
-}
-*/
-
-// Task projection X and Y positioning
+//------------==SLIDERS==------------//
+//TASK PROJECTION X and Y positioning
 var xsliderT = document.getElementById("xAxisTask");
 var xoutputT = document.getElementById("xValTask");
 var ySliderT = document.getElementById("yAxisTask");
@@ -29,7 +17,7 @@ ySliderT.oninput = function() {
     yOutputT.innerHTML = "Y Pos: " + this.value;
 }
 
-// Answer projection X and Y positioning
+// ANSWER PROJECTION X and Y positioning
 var xSliderA = document.getElementById("xAxisAns");
 var xOutputA = document.getElementById("xValAns");
 var ySliderA = document.getElementById("yAxisAns");
@@ -46,7 +34,7 @@ ySliderA.oninput = function() {
     yOutputA.innerHTML = "Y Pos: " + this.value;
 }
 
-// Answer projection X and Y positioning
+// MODEL PROJECTION X and Y positioning
 var xSliderM = document.getElementById("xAxisMod");
 var xOutputM = document.getElementById("xValMod");
 var ySliderM = document.getElementById("yAxisMod");
@@ -62,3 +50,57 @@ xSliderM.oninput = function() {
 ySliderM.oninput = function() {
     yOutputA.innerHTML = "Y Pos: " + this.value;
 }
+//------------==SLIDERS==------------//
+
+//------------==BUTTONS==------------//
+function displayTaskToggle() {
+  var elem = document.getElementById("taskToggle");
+  if (elem.value == "Off") {
+    elem.value = "On";
+    elem.className = "btn btn-success";
+    //
+    // TODO -- Allow task marker content to be displayed
+    //
+  } else {
+    elem.value = "Off";
+    elem.className = "btn btn-danger";
+    //
+    // TODO -- Stop displaying task marker content
+    //
+  }
+}
+
+function displayAnswerToggle() {
+  var elem = document.getElementById("answerToggle");
+  if (elem.value == "Off") {
+    elem.value = "On";
+    elem.className = "btn btn-success";
+    //
+    // TODO -- Allow answer marker content to be displayed
+    //
+  } else {
+    elem.value = "Off";
+    elem.className = "btn btn-danger";
+    //
+    // TODO -- Stop displaying answer marker content
+    //
+  }
+}
+
+function displayModelToggle() {
+  var elem = document.getElementById("modelToggle");
+  if (elem.value == "Off") {
+    elem.value = "On";
+    elem.className = "btn btn-success";
+    //
+    // TODO -- Allow model marker content to be displayed
+    //
+  } else {
+    elem.value = "Off";
+    elem.className = "btn btn-danger";
+    //
+    // TODO -- Stop displaying model marker content
+    //
+  }
+}
+//------------==BUTTONS==------------//
