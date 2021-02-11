@@ -103,4 +103,17 @@ function displayModelToggle() {
     //
   }
 }
-//------------==BUTTONS==------------//
+
+
+function chooseFile(markerArea, center, image) {
+  var file = document.getElementById(markerArea).files[0];
+  var span = document.getElementById(center);
+  var imgHTML = '<img src="" class="img-fluid" height="300" id="' + image + '">';
+  span.innerHTML = imgHTML;
+  var img = document.getElementById(image);
+  img.src = URL.createObjectURL(file);
+  //
+  // TODO -- Push file to wherever files are stored for students to view
+  //
+}
+
