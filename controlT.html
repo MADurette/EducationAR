@@ -28,7 +28,7 @@
             2) "TOP" TASK & ANSWER MARKER CONTROL AREAS
             3) RIGHTHAND CONTROL PANEL
             4) "BOTTOM" MODEL MARKER CONTROL AREA-->
-        <form action="controlT.html">
+        <form>
             <div class="container-fluid h-100" id="mainWorkspaceDiv">
                 <div class="row" id="mainWorkspace">
                     <div class="col-sm-2 align-self-center" id="leftControl">
@@ -38,7 +38,7 @@
                             </div>
                             <div class="card-body">
                                 <p><b>Display Task:</b></p>
-                                <input onclick="displayTaskToggle()" type="button" class="btn btn-danger" id="taskToggle" value="Off">
+                                <input onclick="displayToggle('taskToggle')" type="button" class="btn btn-danger" id="taskToggle" value="Off">
                                 <p></p>
                                 <p><b>Task Position:</b></p>
                                 <div class="slidecontainer">
@@ -50,7 +50,7 @@
                                     <p id="yValTask"></p>
                                 </div>
                                 <p><b>Display Answer:</b></p>
-                                <input onclick="displayAnswerToggle()" type="button" class="btn btn-danger" id="answerToggle" value="Off">
+                                <input onclick="displayToggle('answerToggle')" type="button" class="btn btn-danger" id="answerToggle" value="Off">
                                 <p></p>
                                 <p><b>Answer Position:</b></p>
                                 <div class="slidecontainer">
@@ -73,8 +73,8 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=tMarkButtons>
-                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('tMarkChooseFile', 'tCenter', 'tImage')" id="tMarkChooseFile"></span>
-                                        <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('taskChooseFile', 'tCenter', 'tImage')" id="taskChooseFile"></span>
+                                        <input type="button" class="btn btn-success" id="taskUpload" value="Upload">
                                     </div>
                                 </div>
                             </div>
@@ -85,8 +85,8 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=aMarkButtons>
-                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('aMarkChooseFile', 'aCenter', 'aImage')" id="aMarkChooseFile"></span>
-                                        <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('answerChooseFile', 'aCenter', 'aImage')" id="answerChooseFile"></span>
+                                        <input type="button" class="btn btn-success" id="answerUpload" value="Upload">
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +99,8 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=mMarkButtons>
-                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('mMarkChooseFile', 'mCenter', 'mImage')" id="mMarkChooseFile"></span>
-                                        <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('modelChooseFile', 'mCenter', 'mImage')" id="modelChooseFile"></span>
+                                        <input type="button" class="btn btn-success" id="modelUpload" value="Upload">
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="card-body">
                                 <p><b>Display:</b></p>
-                                <input onclick="displayModelToggle()" type="button" class="btn btn-danger" id="modelToggle" value="Off">
+                                <input onclick="displayToggle('modelToggle')" type="button" class="btn btn-danger" id="modelToggle" value="Off">
                                 <p></p>
                                 <p><b>Model Position:</b></p>
                                 <div class="slidecontainer">

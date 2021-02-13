@@ -53,57 +53,23 @@ ySliderM.oninput = function() {
 //------------==SLIDERS==------------//
 
 //------------==BUTTONS==------------//
-function displayTaskToggle() {
-  var elem = document.getElementById("taskToggle");
-  if (elem.value == "Off") {
-    elem.value = "On";
-    elem.className = "btn btn-success";
+
+function displayToggle(toggleID) {
+  var toggle = document.getElementById(toggleID);
+  if (toggle.value == "Off") {
+    toggle.value = "On";
+    toggle.className = "btn btn-success";
     //
-    // TODO -- Allow task marker content to be displayed
+    // TODO -- Allow marker content to be displayed on AR projection
     //
   } else {
-    elem.value = "Off";
-    elem.className = "btn btn-danger";
+    toggle.value = "Off";
+    toggle.className = "btn btn-danger";
     //
-    // TODO -- Stop displaying task marker content
+    // TODO -- Stop displaying marker content on AR projection
     //
   }
 }
-
-function displayAnswerToggle() {
-  var elem = document.getElementById("answerToggle");
-  if (elem.value == "Off") {
-    elem.value = "On";
-    elem.className = "btn btn-success";
-    //
-    // TODO -- Allow answer marker content to be displayed
-    //
-  } else {
-    elem.value = "Off";
-    elem.className = "btn btn-danger";
-    //
-    // TODO -- Stop displaying answer marker content
-    //
-  }
-}
-
-function displayModelToggle() {
-  var elem = document.getElementById("modelToggle");
-  if (elem.value == "Off") {
-    elem.value = "On";
-    elem.className = "btn btn-success";
-    //
-    // TODO -- Allow model marker content to be displayed
-    //
-  } else {
-    elem.value = "Off";
-    elem.className = "btn btn-danger";
-    //
-    // TODO -- Stop displaying model marker content
-    //
-  }
-}
-
 
 function chooseFile(markerArea, center, image) {
   var file = document.getElementById(markerArea).files[0];
@@ -111,7 +77,7 @@ function chooseFile(markerArea, center, image) {
   var imgHTML = '<img src="" class="img-fluid" height="300" id="' + image + '">';
   span.innerHTML = imgHTML;
   var img = document.getElementById(image);
-  img.src = URL.createObjectURL(file);
+  img.src = URL.createObjectURL(file); // TODO -- find how to restore file name and store
   //
   // TODO -- Push file to wherever files are stored for students to view
   //
