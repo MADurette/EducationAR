@@ -32,9 +32,30 @@ h4 {
     left: 15px;
 }
 
-#tAreaHeader, #aAreaHeader {
+#tAreaHeader, #aAreaHeader, #mAreaHeader {
     position: absolute;
     top: 10px;
     margin-bottom: 0;
 }
 
+.img-fluid {
+    max-height: 300px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    padding-top: 50px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    outline: none;   
+    cursor: inherit;
+    display: block;
+}

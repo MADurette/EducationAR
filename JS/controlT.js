@@ -1,17 +1,5 @@
-/*
-var control = false
-
-function Control(){
-	control = !control;
-	if(control == true){
-		document.getElementById("Controlbtn").value = "Stop Control";
-	}else{
-		document.getElementById("Controlbtn").value = "Take Control";
-	}
-}
-*/
-
-// Task projection X and Y positioning
+//------------==SLIDERS==------------//
+//TASK PROJECTION X and Y positioning
 var xsliderT = document.getElementById("xAxisTask");
 var xoutputT = document.getElementById("xValTask");
 var ySliderT = document.getElementById("yAxisTask");
@@ -29,7 +17,7 @@ ySliderT.oninput = function() {
     yOutputT.innerHTML = "Y Pos: " + this.value;
 }
 
-// Answer projection X and Y positioning
+// ANSWER PROJECTION X and Y positioning
 var xSliderA = document.getElementById("xAxisAns");
 var xOutputA = document.getElementById("xValAns");
 var ySliderA = document.getElementById("yAxisAns");
@@ -46,7 +34,7 @@ ySliderA.oninput = function() {
     yOutputA.innerHTML = "Y Pos: " + this.value;
 }
 
-// Answer projection X and Y positioning
+// MODEL PROJECTION X and Y positioning
 var xSliderM = document.getElementById("xAxisMod");
 var xOutputM = document.getElementById("xValMod");
 var ySliderM = document.getElementById("yAxisMod");
@@ -62,3 +50,36 @@ xSliderM.oninput = function() {
 ySliderM.oninput = function() {
     yOutputA.innerHTML = "Y Pos: " + this.value;
 }
+//------------==SLIDERS==------------//
+
+//------------==BUTTONS==------------//
+
+function displayToggle(toggleID) {
+  var toggle = document.getElementById(toggleID);
+  if (toggle.value == "Off") {
+    toggle.value = "On";
+    toggle.className = "btn btn-success";
+    //
+    // TODO -- Allow marker content to be displayed on AR projection
+    //
+  } else {
+    toggle.value = "Off";
+    toggle.className = "btn btn-danger";
+    //
+    // TODO -- Stop displaying marker content on AR projection
+    //
+  }
+}
+
+function chooseFile(markerArea, center, image) {
+  var file = document.getElementById(markerArea).files[0];
+  var span = document.getElementById(center);
+  var imgHTML = '<img src="" class="img-fluid" height="300" id="' + image + '">';
+  span.innerHTML = imgHTML;
+  var img = document.getElementById(image);
+  img.src = URL.createObjectURL(file); // TODO -- find how to restore file name and store
+  //
+  // TODO -- Push file to wherever files are stored for students to view
+  //
+}
+

@@ -38,12 +38,8 @@
                             </div>
                             <div class="card-body">
                                 <p><b>Display Task:</b></p>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
-                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
-                                </div>
-                                <p>ON</p>
-                                
+                                <input onclick="displayToggle('taskToggle')" type="button" class="btn btn-danger" id="taskToggle" value="Off">
+                                <p></p>
                                 <p><b>Task Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask">
@@ -54,12 +50,8 @@
                                     <p id="yValTask"></p>
                                 </div>
                                 <p><b>Display Answer:</b></p>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
-                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
-                                </div>
-                                <p>OFF</p>
-
+                                <input onclick="displayToggle('answerToggle')" type="button" class="btn btn-danger" id="answerToggle" value="Off">
+                                <p></p>
                                 <p><b>Answer Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns">
@@ -69,7 +61,6 @@
                                     <p id="xValAns"></p>
                                     <p id="yValAns"></p>
                                 </div>
-                                <input type="button" class="btn btn-success" id="tASubmit" value="Submit">
                             </div>
                         </div>
                     </div>
@@ -78,20 +69,24 @@
                             <div class="col-sm-6 align-self-center" id="tMarker">
                                 <div class="jumbotron">
                                     <h6 id="tAreaHeader">TASK MARKER AREA</h6>
-                                    <img src="Materials/Imgs/BaseBinary-HexProblem1.png" width="300">
+                                    <span id="tCenter">
+                                        <h3>No file selected</h3>
+                                    </span>
                                     <div class="btn btn-group" id=tMarkButtons>
-                                            <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
-                                            <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('taskChooseFile', 'tCenter', 'tImage')" id="taskChooseFile"></span>
+                                        <input type="button" class="btn btn-success" id="taskUpload" value="Upload">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 align-self-center" id="aMarker">
                                 <div class="jumbotron">
                                     <h6 id="aAreaHeader">ANSWER MARKER AREA</h6>
-                                    <img src="Materials/Imgs/BaseBinary-HexProblem1TransparentANS.png" width="300">
+                                    <span id="aCenter">
+                                        <h3>No file selected</h3>
+                                    </span>
                                     <div class="btn btn-group" id=aMarkButtons>
-                                        <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
-                                        <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('answerChooseFile', 'aCenter', 'aImage')" id="answerChooseFile"></span>
+                                        <input type="button" class="btn btn-success" id="answerUpload" value="Upload">
                                     </div>
                                 </div>
                             </div>
@@ -99,11 +94,13 @@
                         <div class="row">
                             <div class="col-sm-12 align-self-center" id="mMarker">
                                 <div class="jumbotron">
-                                    <h1>MODEL MARKER AREA</h1>
-                                    <h3>No file selected</h3>
+                                    <h6 id="mAreaHeader">MODEL MARKER AREA</h6>
+                                    <span id="mCenter">
+                                        <h3>No file selected</h3>
+                                    </span>
                                     <div class="btn btn-group" id=mMarkButtons>
-                                        <input type="button" class="btn btn-primary" id="tChooseFile" value="Choose File">
-                                        <input type="button" class="btn btn-success" id="tPushFile" value="Upload">
+                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('modelChooseFile', 'mCenter', 'mImage')" id="modelChooseFile"></span>
+                                        <input type="button" class="btn btn-success" id="modelUpload" value="Upload">
                                     </div>
                                 </div>
                             </div>
@@ -116,12 +113,8 @@
                             </div>
                             <div class="card-body">
                                 <p><b>Display:</b></p>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <input type="button" class="btn btn-danger" id="tDisable" value="Off">
-                                    <input type="button" class="btn btn-success" id="tEnable" value="On">
-                                </div>
-                                <p>OFF</p>
-
+                                <input onclick="displayToggle('modelToggle')" type="button" class="btn btn-danger" id="modelToggle" value="Off">
+                                <p></p>
                                 <p><b>Model Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod">
@@ -131,10 +124,12 @@
                                     <p id="xValMod"></p>
                                     <p id="yValMod"></p>
                                 </div>
-                                <input type="button" class="btn btn-success" id="tASubmit" value="Submit">
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success" id="masterSubmit">Submit</button>
                 </div>
             </div>
         </form>
