@@ -1,4 +1,4 @@
-data = "{
+data = '{
 "RefreshRate" : "60",
 
 "Markers":[
@@ -30,4 +30,4 @@ data = "{
 "Types" : [1,0,0]
 }]}
 ]
-}"
+}';
