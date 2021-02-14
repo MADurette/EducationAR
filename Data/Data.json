@@ -1,0 +1,30 @@
+{
+"RefreshRate" : "60",
+
+"Markers":[
+
+{"Task":[{
+"Src" : "",
+"Loc" : [0,0,0],
+"Dir" : [0,0,0],
+"Rot" : [0,0,0],
+"Control" : "False"
+}]}
+
+{"Answer":[{
+"Src" : "",
+"Loc" : [0,0,0],
+"Dir" : [0,0,0],
+"Rot" : [0,0,0],
+"Control" : "False"
+}]}
+
+{"Model":[{
+"Src" : "",
+"Loc" : [0,0,0],
+"Dir" : [0,0,0],
+"Rot" : [0,0,0],
+"Control" : "False"
+}]}
+]
+}
