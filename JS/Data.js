@@ -1,2 +1,2 @@
-var json = $.getJSON("Data/Data.json");
-console.log(json);
+const data = require('./Data/Data.json');
+console.log(data);
