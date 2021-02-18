@@ -53,7 +53,6 @@ ySliderM.oninput = function() {
 //------------==SLIDERS==------------//
 
 //------------==BUTTONS==------------//
-
 function displayToggle(toggleID) {
   var toggle = document.getElementById(toggleID);
   if (toggle.value == "Off") {
@@ -71,7 +70,14 @@ function displayToggle(toggleID) {
   }
 }
 
-function chooseFile(markerArea, center, image) {
+function chooseExisting(center) {
+  //
+  // TODO -- Let user choose file from existing set of files, then display
+  //
+  console.log('Working on ' + center);
+}
+
+function uploadFile(markerArea, center, image) {
   var file = document.getElementById(markerArea).files[0];
   var span = document.getElementById(center);
   var imgHTML = '<img src="" class="img-fluid" height="300" id="' + image + '">';
@@ -82,4 +88,3 @@ function chooseFile(markerArea, center, image) {
   // TODO -- Push file to wherever files are stored for students to view
   //
 }
-

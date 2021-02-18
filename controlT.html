@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="CSS/bootstrap.min.css">
         <link rel="stylesheet" href="CSS/controlT.css">
         <script src="JS/controlT.js" async></script>
+        <script src="https://cdn.rawgit.com/mozilla/localForage/master/dist/localforage.js" async></script>
     </head>
     <body>
         <!--TOP "ARPS: INSTRUCTOR CONTROL PANEL" BAR-->
@@ -73,8 +74,8 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=tMarkButtons>
-                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('taskChooseFile', 'tCenter', 'tImage')" id="taskChooseFile"></span>
-                                        <input type="button" class="btn btn-success" id="taskUpload" value="Upload">
+                                        <input type="button" class="btn btn-primary" onclick="chooseExisting('tCenter')" id="taskUpload" value="Choose Existing">
+                                        <span class="btn btn-file btn-success">Upload New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile"></span>
                                     </div>
                                 </div>
                             </div>
@@ -85,8 +86,8 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=aMarkButtons>
-                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('answerChooseFile', 'aCenter', 'aImage')" id="answerChooseFile"></span>
-                                        <input type="button" class="btn btn-success" id="answerUpload" value="Upload">
+                                        <input type="button" class="btn btn-primary" onclick="chooseExisting('aCenter')" id="answerUpload" value="Choose Existing">
+                                        <span class="btn btn-file btn-success">Upload New<input type="file" oninput="uploadFile('answerUploadFile', 'aCenter', 'aImage')" id="answerUploadFile"></span>
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +100,8 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=mMarkButtons>
-                                        <span class="btn btn-file btn-primary">Choose File<input type="file" oninput="chooseFile('modelChooseFile', 'mCenter', 'mImage')" id="modelChooseFile"></span>
-                                        <input type="button" class="btn btn-success" id="modelUpload" value="Upload">
+                                        <input type="button" class="btn btn-primary" onclick="chooseExisting('mCenter')" id="modelUpload" value="Choose Existing">
+                                        <span class="btn btn-file btn-success">Upload New<input type="file" oninput="uploadFile('modelUploadFile', 'mCenter', 'mImage')" id="modelUploadFile"></span>
                                     </div>
                                 </div>
                             </div>
