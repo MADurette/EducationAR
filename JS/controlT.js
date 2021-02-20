@@ -41,14 +41,14 @@ var ySliderM = document.getElementById("yAxisMod");
 var yOutputM = document.getElementById("yValMod");
 
 xOutputM.innerHTML = "X Pos: " + xSliderM.value;
-yOutputM.innerHTML = "Y Pos: " + ySliderA.value;
+yOutputM.innerHTML = "Y Pos: " + ySliderM.value;
 
 xSliderM.oninput = function() {
   xOutputM.innerHTML =  "X Pos: " + this.value;
 }
 
 ySliderM.oninput = function() {
-    yOutputA.innerHTML = "Y Pos: " + this.value;
+    yOutputM.innerHTML = "Y Pos: " + this.value;
 }
 //------------==SLIDERS==------------//
 

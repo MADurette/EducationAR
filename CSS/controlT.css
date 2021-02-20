@@ -14,12 +14,19 @@ html, body {
     background-color: red;
 }
 
+h3{
+	vertical-align: center;
+	margin-top:15px;
+}
+
 h4 {
     margin-bottom: 0;
 }
 
 #leftControl, #markerSpace, #rightControl {
     text-align: center;
+	min-width: 200px;
+	margin-top: 20px; 
 }
 
 .row {
@@ -36,6 +43,10 @@ h4 {
     position: absolute;
     top: 10px;
     margin-bottom: 0;
+}
+
+.jumbotron {
+	min-height:200px;
 }
 
 .img-fluid {
@@ -58,4 +69,8 @@ h4 {
     outline: none;   
     cursor: inherit;
     display: block;
+}
+
+.higher {
+	margin-bottom:20px;
 }
