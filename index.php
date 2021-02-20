@@ -1,6 +1,7 @@
 <?php
 #require_once($_SERVER['DOCUMENT_ROOT'].'/xampp/EducationAR/Config/mysqlconfig.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -10,10 +11,11 @@
     <script src="Frameworks/Aframe.min.js"></script>
     <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="Frameworks/Aframe-ar.js"></script>
-	  <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
-    <script>
-      window.onload = function () {
-        document
+	<script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+	<script type="text/javascript" src="Frameworks/jQuery.min.js"></script>
+	<script>
+    window.onload = function () {
+      document
         .querySelector(".hint-button")
         .addEventListener("click", function () {
           // here you can change also a-scene or a-entity properties, like
@@ -21,14 +23,14 @@
           // or you can just open links, trigger actions...
           alert("Hint Box");
         });
-      };
-	  
-	  var name = 0;
+    };
 	
-	  function loaddata(){
-	  var name=document.getElementById( "username" );
+	var name = 0;
 	
-	  if(name){
+	function loaddata(){
+	var name=document.getElementById( "username" );
+	
+	if(name){
 		$.ajax({
 			type: 'post',
 			url: 'Config/loaddata.php',
@@ -36,15 +38,33 @@
 				user_name:name,
 			},
 			success: function (response) {
-	  // We get the element having id of display_info and put the response inside it
-      console.log(response);
-	  }});
-	  }
-	  else{
-		  console.log("Test");
-		  }
-	  }
-      </script>
+	// We get the element having id of display_info and put the response inside it
+    InsertData(response);
+	}});
+	}
+	else{
+		console.log("Error loading data from Database");
+		}
+	}
+	
+	function InsertData(data){
+		document.getElementById("Tasktexture").src = "";
+		document.getElementById("Answertexture").src = "";
+		document.getElementById("Modeltexture").src = "";
+		document.getElementById("3dobj").src = "";
+		document.getElementById("Prerecordedvid").src = "";
+		document.getElementById("Aentity").position = "";
+		document.getElementById("Tentity").position = "";
+		document.getElementById("Mentity").position = "";
+		document.getElementById("Aentity").scale = "";
+		document.getElementById("Tentity").scale = "";
+		document.getElementById("Mentity").scale = "";
+		document.getElementById("Aentity").animation = "";
+		document.getElementById("Tentity").animation= "";
+		document.getElementById("Mentity").animation = "";
+	}
+	
+  </script>
   <style>
     .buttons {
       position: absolute;
@@ -119,21 +139,21 @@
 			<img id="Answertexture" src="Materials/Imgs/BaseBinary-HexProblem1TransparentANS.png" style="width:100%;">
 			<img id="Modeltexture" src="Materials/Imgs/BaseBinary-HexProblem1.png" style="width:100%;">
 			<video id="Prerecordedvid" autoplay loop="true" src="Materials/Videos/Digital.mp4"></video>
-			<a-asset-item id="dna-obj" src="Materials/Models/dna.obj"></a-asset-item>
+			<a-asset-item id="3dobj" src="Materials/Models/dna.obj"></a-asset-item>
 			<a-mixin id="normal" scale=".05 .05 .05"></a-mixin>
 		</a-assets>
         <a-scene embedded arjs="sourceType: webcam; patternRatio: 0.75 trackingMethod: best maxDetectionRate: 60 detectionMode: mono" renderer="antialias: true; alpha: true; precision: medium; logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false;" gesture-detector id="scene">
 		<!-- Marker T is the marker for Pictures with tasks-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-T.patt" id="markerT">
-              <a-entity geometry="primitive:plane;height:2;width:2;" position="2 0 .5" rotation="-90 0 0" material="src:#Tasktexture;shader:flat;"></a-entity>
+              <a-entity id="Tentity" geometry="primitive:plane;height:2;width:2;" position="2 0 .5" rotation="-90 0 0" material="src:#Tasktexture;shader:flat;"></a-entity>
         </a-marker>
 		<!-- Marker A is the marker for Pictures with Answers or Hints-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-A.patt" id="markerA">
-              <a-video id="3dvid" src="#Prerecordedvid" width="3" height="3" position="0 0 0" rotation="-90 0 0" webkit-playsinline playsinline></a-video>
+              <a-video id="Aentity" src="#Prerecordedvid" width="3" height="3" position="0 0 0" rotation="-90 0 0" webkit-playsinline playsinline></a-video>
         </a-marker>
 		<!-- Marker M is the marker for Models and Helpful Infographics-->
 		<a-marker type="pattern" url="Markers/MarkerFile/pattern-M.patt" raycaster="objects: .clickable"  emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerM">
-			  <a-entity mixin="normal" animation="property: rotation; to: 360 0 0; loop: true; dur: 10000" obj-model="obj: #dna-obj;" class="clickable" gesture-handler></a-entity>
+			  <a-entity id="Mentity" mixin="normal" animation="property: rotation; to: 360 0 0; loop: true; dur: 10000" obj-model="obj: #3dobj;" class="clickable" gesture-handler></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
         </a-scene>
