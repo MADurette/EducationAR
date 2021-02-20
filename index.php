@@ -1,3 +1,6 @@
+<?php
+#require_once($_SERVER['DOCUMENT_ROOT'].'/xampp/EducationAR/Config/mysqlconfig.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -19,6 +22,28 @@
           alert("Hint Box");
         });
       };
+	  
+	  var name = 0;
+	
+	  function loaddata(){
+	  var name=document.getElementById( "username" );
+	
+	  if(name){
+		$.ajax({
+			type: 'post',
+			url: 'Config/loaddata.php',
+			data: {
+				user_name:name,
+			},
+			success: function (response) {
+	  // We get the element having id of display_info and put the response inside it
+      console.log(response);
+	  }});
+	  }
+	  else{
+		  console.log("Test");
+		  }
+	  }
       </script>
   <style>
     .buttons {
