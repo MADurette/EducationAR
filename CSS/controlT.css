@@ -74,3 +74,6 @@ h4 {
 .higher {
 	margin-bottom:20px;
 }
+hr.solid {
+  border-top: 3px solid #555;
+}

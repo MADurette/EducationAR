@@ -15,13 +15,6 @@
         <div class="container-fluid" id="topBar">
             <h4>ARPS: Instructor Control Panel</h4>
         </div>
-        <!--DEMO NOTFICICATION-->
-        <div class="container-fluid" id="placeholderNote">
-            <p><b>!!!Attention, this is a placeholder demo of the instructor
-                    control panel!!!</b></p>
-            <p><b>!!!Any feedback is greatly appreciated and will be
-                    considered!!!</b></p>
-        </div>
         <div class="container" id="separator" style="margin-bottom: 2%;">
         </div>
         <!--MAIN WORKSPACE OF CONTROL PANEL INCLUDES
@@ -31,11 +24,11 @@
             4) "BOTTOM" MODEL MARKER CONTROL AREA-->
         <form>
             <div class="container-fluid h-100" id="mainWorkspaceDiv">
-                <div class="row" id="mainWorkspace">
-                    <div class="col-sm-3 align-self-center" id="leftControl">
+                <div class="row" id="mainWorkspace" style="margin-bottom:20px;">
+                    <div class="col-sm-4 align-self-center" id="leftControl">
                         <div class="card">
                             <div class="card-header">
-                                <h6>Task & Answer Control</h6>
+                                <h6>Controls</h6>
                             </div>
                             <div class="card-body">
                                 <p><b>Display Task:</b></p>
@@ -44,28 +37,36 @@
                                 <p><b>Task Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisTask">
-                                </div>
-                                <div class="container-fluid">
                                     <p id="xValTask"></p>
-                                    <p id="yValTask"></p>
+									<input type="range" min="-128" max="127" value="0" class="slider" id="yAxisTask">
+									<p id="yValTask"></p>
                                 </div>
+								<hr class="solid"><br>
                                 <p><b>Display Answer:</b></p>
                                 <input onclick="displayToggle('answerToggle')" type="button" class="btn btn-danger" id="answerToggle" value="Off">
                                 <p></p>
                                 <p><b>Answer Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns">
+									<p id="xValAns"></p>
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisAns">
-                                </div>
-                                <div class="container-fluid">
-                                    <p id="xValAns"></p>
-                                    <p id="yValAns"></p>
+									<p id="yValAns"></p>
+								</div>
+								<hr class="solid"><br>
+                                <p><b>Display:</b></p>
+                                <input onclick="displayToggle('modelToggle')" type="button" class="btn btn-danger" id="modelToggle" value="Off">
+                                <p></p>
+                                <p><b>Model Position:</b></p>
+                                <div class="slidecontainer">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod">
+									<p id="xValMod"></p>
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisMod">
+									<p id="yValMod"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 align-self-center" id="markerSpace">
+                    <div class="col-sm-8 align-self-center" id="markerSpace">
                         <div class="row" id="topMarkers">
                             <div class="col-sm-6 align-self-center" id="tMarker">
                                 <div class="jumbotron">
@@ -106,31 +107,10 @@
                                 </div>
                             </div>
                         </div>
+						<div class="text-center">
+							<button type="submit" class="btn btn-success" id="masterSubmit higher">Submit</button>
+						</div>
                     </div>
-                    <div class="col-sm-3 align-self-center" id="rightControl">
-                        <div class="card">
-                            <div class="card-header">
-                                <h6>Model Control</h6>
-                            </div>
-                            <div class="card-body">
-                                <p><b>Display:</b></p>
-                                <input onclick="displayToggle('modelToggle')" type="button" class="btn btn-danger" id="modelToggle" value="Off">
-                                <p></p>
-                                <p><b>Model Position:</b></p>
-                                <div class="slidecontainer">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisMod">
-                                </div>
-                                <div class="container-fluid">
-                                    <p id="xValMod"></p>
-                                    <p id="yValMod"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-success" id="masterSubmit higher">Submit</button>
                 </div>
             </div>
         </form>
