@@ -1,3 +1,7 @@
+<?php
+    #require_once($_SERVER['DOCUMENT_ROOT'].'/xampp/EducationAR/Config/mysqlconfig.php');
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -5,10 +9,9 @@
         <meta charset="utf-8">
         <title>ARPS: Instructor Control Panel</title>
         <link rel="shortcut icon" href="" type="image/x-icon">
-        <link rel="stylesheet" href="CSS/bootstrap.min.css">
-        <link rel="stylesheet" href="CSS/controlT.css">
+        <link rel="stylesheet" href="./CSS/bootstrap.min.css">
+        <link rel="stylesheet" href="./CSS/controlT.css">
         <script src="JS/controlT.js" async></script>
-        <script src="https://cdn.rawgit.com/mozilla/localForage/master/dist/localforage.js" async></script>
     </head>
     <body>
         <!--TOP "ARPS: INSTRUCTOR CONTROL PANEL" BAR-->
