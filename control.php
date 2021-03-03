@@ -10,8 +10,8 @@
         <title>ARPS: Instructor Control Panel</title>
         <link rel="shortcut icon" href="" type="image/x-icon">
         <link rel="stylesheet" href="./CSS/bootstrap.min.css">
-        <link rel="stylesheet" href="./CSS/controlT.css">
-        <script src="JS/controlT.js" async></script>
+        <link rel="stylesheet" href="./CSS/control.css">
+        <script src="./JS/control.js" async></script>
     </head>
     <body>
         <!--TOP "ARPS: INSTRUCTOR CONTROL PANEL" BAR-->
