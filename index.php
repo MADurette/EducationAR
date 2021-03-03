@@ -7,13 +7,14 @@
 	<head>
 	<title>Classroom AR</title>
 	<link rel="shortcut icon" href="" type="image/x-icon">
-	<link rel="stylesheet" href="CSS/Style.css">
-    <script src="Frameworks/Aframe.min.js"></script>
+	<link rel="stylesheet" href="./CSS/Style.css">
+    <script src="./Frameworks/Aframe.min.js"></script>
     <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="Frameworks/Aframe-ar.js"></script>
 	<script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
-	<script type="text/javascript" src="Frameworks/jQuery.min.js"></script>
+	<script type="text/javascript" src="./Frameworks/jQuery.min.js"></script>
 	<script>
+    
     window.onload = function () {
       document
         .querySelector(".hint-button")
