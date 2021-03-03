@@ -1,5 +1,5 @@
 <?php
-	#require_once($_SERVER['DOCUMENT_ROOT'].'/xampp/EducationAR/Config/mysqlconfig.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/Config/mysqlconfig.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 		<!-- we import arjs version without NFT but with marker + location based support -->
 		<script src="./Frameworks/Aframe-ar.js"></script>
 		<script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
-		<script type="text/javascript" src="./Frameworks/jQuery.min.js"></script>
+		<script src="./Frameworks/jQuery.min.js"></script>
 	</head>
 	<body style="margin : 0px; overflow: hidden;">
 		<div class="buttons">
