@@ -9,12 +9,12 @@ xoutputT.innerHTML = "X Pos: " + xsliderT.value; // Display the default slider v
 yOutputT.innerHTML = "Y Pos: " + ySliderT.value;
 
 // Update the current slider value (each time you drag the slider handle)
-xsliderT.oninput = function() {
-    xoutputT.innerHTML =  "X Pos: " + this.value;
+xsliderT.oninput = function () {
+  xoutputT.innerHTML = "X Pos: " + this.value;
 }
-  
-ySliderT.oninput = function() {
-    yOutputT.innerHTML = "Y Pos: " + this.value;
+
+ySliderT.oninput = function () {
+  yOutputT.innerHTML = "Y Pos: " + this.value;
 }
 
 // ANSWER PROJECTION X and Y positioning
@@ -26,12 +26,12 @@ var yOutputA = document.getElementById("yValAns");
 xOutputA.innerHTML = "X Pos: " + xSliderA.value;
 yOutputA.innerHTML = "Y Pos: " + ySliderA.value;
 
-xSliderA.oninput = function() {
-  xOutputA.innerHTML =  "X Pos: " + this.value;
+xSliderA.oninput = function () {
+  xOutputA.innerHTML = "X Pos: " + this.value;
 }
 
-ySliderA.oninput = function() {
-    yOutputA.innerHTML = "Y Pos: " + this.value;
+ySliderA.oninput = function () {
+  yOutputA.innerHTML = "Y Pos: " + this.value;
 }
 
 // MODEL PROJECTION X and Y positioning
@@ -43,12 +43,12 @@ var yOutputM = document.getElementById("yValMod");
 xOutputM.innerHTML = "X Pos: " + xSliderM.value;
 yOutputM.innerHTML = "Y Pos: " + ySliderM.value;
 
-xSliderM.oninput = function() {
-  xOutputM.innerHTML =  "X Pos: " + this.value;
+xSliderM.oninput = function () {
+  xOutputM.innerHTML = "X Pos: " + this.value;
 }
 
-ySliderM.oninput = function() {
-    yOutputM.innerHTML = "Y Pos: " + this.value;
+ySliderM.oninput = function () {
+  yOutputM.innerHTML = "Y Pos: " + this.value;
 }
 //------------==SLIDERS==------------//
 

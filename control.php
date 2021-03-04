@@ -1,5 +1,45 @@
 <?php
-    #require_once($_SERVER['DOCUMENT_ROOT'].'/xampp/EducationAR/Config/mysqlconfig.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/Config/mysqlconfig.php');
+
+    function uploadFile($fileName, $projectionType) {
+        // Taken from https://www.youtube.com/watch?v=2jxM7IwpiXc
+        if (isset($fileName)) {
+             // List of errors that could come up when uploading, use print_r['taskUploadFile'] somewhere below to check for code
+            $uploadErrors = array(
+                0 => 'Success',
+                  1 => 'File is larger than specified size limit',
+                  2 => 'File is too large for HTML form',
+                3 => 'Partial upload',
+                4 => 'No file uploaded',
+                6 => 'Missing temporary folder',
+                7 => 'Failed to write file to disk',
+                8 => 'Something else stopped the upload'
+            );
+            $name = $_FILES['taskUploadFile']['name']; // Just gives the name of the file, used for writing to database
+        
+            //$extensiontError = false;       // Can be implemented when we figure out what files shouldn't go in
+            //$extensions = array();
+            $fileExtension = explode('.', $fileName);
+            $fileExtension = end($fileExtension);
+
+            /*
+            if (!in_array($fileExtension, $extensions)) {   // Part of extension checking
+                $extensiontError = true;
+            }
+            */
+
+            if ($fileName['name'] != 0) {
+                echo $uploadErrors[$_FILES['taskUploadFile']['name']];
+            } else if ($extensiontError) {
+                echo 'Invalid file extension';
+            }
+
+            move_uploaded_file($fileName['tmp_name'], 'materials/imgs/'.$fileName['name']);
+            // TODO -- MAKE WRITING TO THE DATABASE WORK
+            //$sql = "INSERT IGNORE INTO `DisplayFiles` (name, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', '/materials/imgs/', 'task')";
+            //$mysqli -> query($sql) or die($mysqli->error);
+    }}
+    
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +65,7 @@
             2) "TOP" TASK & ANSWER MARKER CONTROL AREAS
             3) RIGHTHAND CONTROL PANEL
             4) "BOTTOM" MODEL MARKER CONTROL AREA-->
-        <form>
+        <!--<form action="" method="post" enctype="multipart/form-data">-->
             <div class="container-fluid h-100" id="mainWorkspaceDiv">
                 <div class="row" id="mainWorkspace" style="margin-bottom:20px;">
                     <div class="col-sm-4 align-self-center" id="leftControl">
@@ -78,8 +118,12 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=tMarkButtons>
-                                        <input type="button" class="btn btn-primary" onclick="chooseExisting('tCenter')" id="taskUpload" value="Choose Existing">
-                                        <span class="btn btn-file btn-success">Upload New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile"></span>
+                                        <input type="button" class="btn btn-secondary" onclick="chooseExisting('tCenter')" id="taskUpload" value="Choose Existing">
+                                            <?php uploadFile($_FILES['taskUploadFile'], 'task')?>
+                                            <form action="" method="POST" enctype="multipart/form-data">
+                                                <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile" name="taskUploadFile"></span>
+                                                <input type="submit" class="btn btn-success" value="Upload">
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -90,8 +134,12 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=aMarkButtons>
-                                        <input type="button" class="btn btn-primary" onclick="chooseExisting('aCenter')" id="answerUpload" value="Choose Existing">
-                                        <span class="btn btn-file btn-success">Upload New<input type="file" oninput="uploadFile('answerUploadFile', 'aCenter', 'aImage')" id="answerUploadFile"></span>
+                                        <input type="button" class="btn btn-secondary" onclick="chooseExisting('aCenter')" id="answerUpload" value="Choose Existing">
+                                            <?php uploadFile($_FILES['answerUploadFile'], 'answer')?>
+                                            <form action="" method="POST" enctype="multipart/form-data">
+                                                <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('answerUploadFile', 'aCenter', 'aImage')" id="answerUploadFile" name="answerUploadFile"></span>
+                                                <input type="submit" class="btn btn-success" value="Upload">
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -104,8 +152,12 @@
                                         <h3>No file selected</h3>
                                     </span>
                                     <div class="btn btn-group" id=mMarkButtons>
-                                        <input type="button" class="btn btn-primary" onclick="chooseExisting('mCenter')" id="modelUpload" value="Choose Existing">
-                                        <span class="btn btn-file btn-success">Upload New<input type="file" oninput="uploadFile('modelUploadFile', 'mCenter', 'mImage')" id="modelUploadFile"></span>
+                                        <input type="button" class="btn btn-secondary" onclick="chooseExisting('mCenter')" id="modelUpload" value="Choose Existing">
+                                            <?php uploadFile($_FILES['modelUploadFile'], 'model')?>
+                                            <form action="" method="POST" enctype="multipart/form-data">
+                                                <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('modelUploadFile', 'mCenter', 'mImage')" id="modelUploadFile" name="modelUploadFile"></span>
+                                                <input type="submit" class="btn btn-success" value="Upload">
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -116,6 +168,6 @@
                     </div>
                 </div>
             </div>
-        </form>
+        <!--</form>-->
     </body>
 </html>
