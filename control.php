@@ -53,7 +53,6 @@
             $sql = "INSERT INTO DisplayFiles (name, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType')";
 
             if (mysqli_query($conn, $sql)) {
-                echo "New record created successfully";
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }

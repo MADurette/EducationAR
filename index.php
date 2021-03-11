@@ -1,5 +1,10 @@
 <?php
-	require_once($_SERVER['DOCUMENT_ROOT'].'/Config/mysqlconfig.php');
+	/* Database credentials. Assuming you are running MySQL
+    server with default setting (user 'root' with no password) */
+    define('DB_SERVER', 'localhost');
+    define('DB_USERNAME', 'educarps_defUser');
+    define('DB_PASSWORD', 'thisIsOurDefaultUser');
+    define('DB_NAME', 'educarps_DisplayFiles');
 ?>
 
 <!DOCTYPE html>
