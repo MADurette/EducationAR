@@ -1,14 +1,28 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'].'/Config/mysqlconfig.php');
+    /* Database credentials. Assuming you are running MySQL
+    server with default setting (user 'root' with no password) */
+    define('DB_SERVER', 'localhost');
+    define('DB_USERNAME', 'educarps_defUser');
+    define('DB_PASSWORD', 'thisIsOurDefaultUser');
+    define('DB_NAME', 'educarps_DisplayFiles');
+ 
+    // Attempt to connect to MySQL database
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+ 
+    // Check for good connection
+    if (!$conn) {
+        die("Connection failed: ".mysqli_connect_error());
+    }
 
     function uploadFile($fileName, $projectionType) {
+        global $conn;
         // Taken from https://www.youtube.com/watch?v=2jxM7IwpiXc
         if (isset($fileName)) {
              // List of errors that could come up when uploading, use print_r['taskUploadFile'] somewhere below to check for code
             $uploadErrors = array(
                 0 => 'Success',
-                  1 => 'File is larger than specified size limit',
-                  2 => 'File is too large for HTML form',
+                1 => 'File is larger than specified size limit',
+                2 => 'File is too large for HTML form',
                 3 => 'Partial upload',
                 4 => 'No file uploaded',
                 6 => 'Missing temporary folder',
@@ -35,9 +49,14 @@
             }
 
             move_uploaded_file($fileName['tmp_name'], 'materials/imgs/'.$fileName['name']);
-            // TODO -- MAKE WRITING TO THE DATABASE WORK
-            //$sql = "INSERT IGNORE INTO `DisplayFiles` (name, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', '/materials/imgs/', 'task')";
-            //$mysqli -> query($sql) or die($mysqli->error);
+            //TODO -- MAKE WRITING TO THE DATABASE WORK
+            $sql = "INSERT INTO DisplayFiles (name, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType')";
+
+            if (mysqli_query($conn, $sql)) {
+                echo "New record created successfully";
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
     }}
     
 ?>
