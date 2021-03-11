@@ -14,6 +14,7 @@
         die("Connection failed: ".mysqli_connect_error());
     }
 
+    // Handles uploading new files to the server and their respective information to the DB
     function uploadFile($fileName, $projectionType) {
         global $conn;
         // Taken from https://www.youtube.com/watch?v=2jxM7IwpiXc
@@ -58,6 +59,38 @@
             }
     }}
     
+        function postData() {
+            global $conn;
+            // Get all inputs from form
+            $taskToggle = $_REQUEST['taskToggle'];
+            $xAxisTask = $_REQUEST['xAxisTask'];
+            $yAxisTask = $_REQUEST['yAxisTask'];
+            $answerToggle = $_REQUEST['answerToggle'];
+            $xAxisAns = $_REQUEST['xAxisAns'];
+            $yAxisAns = $_REQUEST['yAxisAns'];
+            $modelToggle = $_REQUEST['modelToggle'];
+            $xAxisMod = $_REQUEST['xAxisMod'];
+            $yAxisMod = $_REQUEST['yAxisMod'];
+
+            $sql = "UPDATE ControlData SET DisplayToggle = '$taskToggle', XPos = '$xAxisTask', YPos = '$yAxisTask' WHERE MarkerArea = 'task';";
+            if (mysqli_query($conn, $sql)) {
+
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+            $sql = "UPDATE ControlData SET DisplayToggle = '$answerToggle', XPos = '$xAxisAns', YPos = '$yAxisAns' WHERE MarkerArea = 'answer';";
+            if (mysqli_query($conn, $sql)) {
+
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+            $sql = "UPDATE ControlData SET DisplayToggle = '$modelToggle', XPos = '$xAxisMod', YPos = '$yAxisMod' WHERE MarkerArea = 'model';";
+            if (mysqli_query($conn, $sql)) {
+
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+        }
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +116,8 @@
             2) "TOP" TASK & ANSWER MARKER CONTROL AREAS
             3) RIGHTHAND CONTROL PANEL
             4) "BOTTOM" MODEL MARKER CONTROL AREA-->
-        <!--<form action="" method="post" enctype="multipart/form-data">-->
+        <?php postData()?>
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="container-fluid h-100" id="mainWorkspaceDiv">
                 <div class="row" id="mainWorkspace" style="margin-bottom:20px;">
                     <div class="col-sm-4 align-self-center" id="leftControl">
@@ -93,35 +127,35 @@
                             </div>
                             <div class="card-body">
                                 <p><b>Display Task:</b></p>
-                                <input onclick="displayToggle('taskToggle')" type="button" class="btn btn-danger" id="taskToggle" value="Off">
+                                <input onclick="displayToggle('taskToggle')" type="checkbox" class="btn btn-danger" id="taskToggle" value="Off" name="taskToggle">
                                 <p></p>
                                 <p><b>Task Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask" name="xAxisTask">
                                     <p id="xValTask"></p>
-									<input type="range" min="-128" max="127" value="0" class="slider" id="yAxisTask">
+									<input type="range" min="-128" max="127" value="0" class="slider" id="yAxisTask" name="yAxisTask">
 									<p id="yValTask"></p>
                                 </div>
 								<hr class="solid"><br>
                                 <p><b>Display Answer:</b></p>
-                                <input onclick="displayToggle('answerToggle')" type="button" class="btn btn-danger" id="answerToggle" value="Off">
+                                <input onclick="displayToggle('answerToggle')" type="checkbox" class="btn btn-danger" id="answerToggle" value="Off" name="answerToggle">
                                 <p></p>
                                 <p><b>Answer Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns" name="xAxisAns">
 									<p id="xValAns"></p>
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisAns">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisAns" name="yAxisAns">
 									<p id="yValAns"></p>
 								</div>
 								<hr class="solid"><br>
-                                <p><b>Display:</b></p>
-                                <input onclick="displayToggle('modelToggle')" type="button" class="btn btn-danger" id="modelToggle" value="Off">
+                                <p><b>Display Model:</b></p>
+                                <input onclick="displayToggle('modelToggle')" type="checkbox" class="btn btn-danger" id="modelToggle" value="Off" name="modelToggle">
                                 <p></p>
                                 <p><b>Model Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod" name="xAxisMod">
 									<p id="xValMod"></p>
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisMod">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisMod" name="yAxisMod">
 									<p id="yValMod"></p>
                                 </div>
                             </div>
@@ -186,6 +220,6 @@
                     </div>
                 </div>
             </div>
-        <!--</form>-->
+        </form>
     </body>
 </html>
