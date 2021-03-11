@@ -51,8 +51,13 @@
 
             move_uploaded_file($fileName['tmp_name'], 'materials/imgs/'.$fileName['name']);
             //TODO -- MAKE WRITING TO THE DATABASE WORK
-            $sql = "INSERT INTO DisplayFiles (name, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType')";
+            $sql = "INSERT INTO DisplayFiles (name, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType');";
+            if (mysqli_query($conn, $sql)) {
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
 
+            $sql = "UPDATE ControlData SET Source = 'materials/imgs/$name' WHERE MarkerArea = '$projectionType';";
             if (mysqli_query($conn, $sql)) {
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);

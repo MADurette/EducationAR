@@ -5,6 +5,12 @@
     define('DB_USERNAME', 'educarps_defUser');
     define('DB_PASSWORD', 'thisIsOurDefaultUser');
     define('DB_NAME', 'educarps_DisplayFiles');
+
+	$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+	if (!$conn) {
+		die("Connection failed: ".mysqli_connect_error());
+	}
 ?>
 
 <!DOCTYPE html>
@@ -30,11 +36,21 @@
 			<div id="start-button">Click</div>
 		</div>
 		<a-assets>
-			<img id="Tasktexture" src="Materials/Imgs/BaseBinary-HexProblem1Transparent.png" style="width:100%;">
-			<img id="Answertexture" src="Materials/Imgs/BaseBinary-HexProblem1TransparentANS.png" style="width:100%;">
-			<img id="Modeltexture" src="Materials/Imgs/BaseBinary-HexProblem1.png" style="width:100%;">
-			<video id="Prerecordedvid" autoplay loop="true" src="Materials/Videos/Digital.mp4"></video>
-			<a-asset-item id="3dobj" src="Materials/Models/dna.obj"></a-asset-item>
+			<?php
+				$sql = 'SELECT * FROM ControlData';
+				if ($result = mysqli_query($conn, $sql)) {
+					while ($row = mysqli_fetch_assoc($result)) {
+						echo '<img id="' . $row['MarkerArea'] . 'texture" src="' . $row['Source'] . '" style="width:100%;">
+						';
+					}
+					mysqli_free_result($result);
+				}
+			?>
+			<!--<img id="Tasktexture" src="materials/imgs/IMG_0287.png" style="width:100%;">
+			<img id="Answertexture" src="materials/imgs/BaseBinary-HexProblem1TransparentANS.png" style="width:100%;">
+			<img id="Modeltexture" src="materials/imgs/BaseBinary-HexProblem1.png" style="width:100%;">-->
+			<video id="Prerecordedvid" autoplay loop="true" src="materials/videos/Digital.mp4"></video>
+			<a-asset-item id="3dobj" src="materials/models/dna.obj"></a-asset-item>
 			<a-mixin id="normal" scale=".05 .05 .05"></a-mixin>
 		</a-assets>
 		<a-scene embedded arjs="sourceType: webcam; patternRatio: 0.75 trackingMethod: best maxDetectionRate: 60 detectionMode: mono" 
