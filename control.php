@@ -145,7 +145,7 @@
                                 <p><b>Display Answer:</b></p>
                                 <input onclick="displayToggle('answerToggle')" type="checkbox" class="btn btn-danger" id="answerToggle" value="Off" name="answerToggle">
                                 <p></p>
-                                <p><b>Answer Position:</b></p>
+                                <p><b>Hint Position:</b></p>
                                 <div class="slidecontainer">
                                     <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns" name="xAxisAns">
 									<p id="xValAns"></p>
@@ -186,7 +186,7 @@
                             </div>
                             <div class="col-sm-6 align-self-center" id="aMarker">
                                 <div class="jumbotron">
-                                    <h6 id="aAreaHeader">ANSWER MARKER AREA</h6>
+                                    <h6 id="aAreaHeader">HINT MARKER AREA</h6>
                                     <span id="aCenter">
                                         <h3>No file selected</h3>
                                     </span>
