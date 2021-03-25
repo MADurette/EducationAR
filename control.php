@@ -136,20 +136,20 @@
                                 <p></p>
                                 <p><b>Task Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask" name="xAxisTask">
+                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisTask" name="xAxisTask">
                                     <p id="xValTask"></p>
-									<input type="range" min="-128" max="127" value="0" class="slider" id="yAxisTask" name="yAxisTask">
+									<input type="range" min="-5" max="5" value="0" class="slider" id="yAxisTask" name="yAxisTask">
 									<p id="yValTask"></p>
                                 </div>
 								<hr class="solid"><br>
-                                <p><b>Display Answer:</b></p>
-                                <input onclick="displayToggle('answerToggle')" type="checkbox" class="btn btn-danger" id="answerToggle" value="Off" name="answerToggle">
+                                <p><b>Display Hint:</b></p>
+                                <input onclick="displayToggle('hintToggle')" type="checkbox" class="btn btn-danger" id="hintToggle" value="Off" name="hintToggle">
                                 <p></p>
                                 <p><b>Hint Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns" name="xAxisAns">
+                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisAns" name="xAxisAns">
 									<p id="xValAns"></p>
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisAns" name="yAxisAns">
+                                    <input type="range" min="-5" max="5" value="0" class="slider" id="yAxisAns" name="yAxisAns">
 									<p id="yValAns"></p>
 								</div>
 								<hr class="solid"><br>
@@ -158,9 +158,9 @@
                                 <p></p>
                                 <p><b>Model Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod" name="xAxisMod">
+                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisMod" name="xAxisMod">
 									<p id="xValMod"></p>
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisMod" name="yAxisMod">
+                                    <input type="range" min="-5" max="5" value="0" class="slider" id="yAxisMod" name="yAxisMod">
 									<p id="yValMod"></p>
                                 </div>
                             </div>

@@ -58,14 +58,23 @@
 			vr-mode-ui="enabled: false;" gesture-detector id="scene">
 			<!-- Marker T is the marker for Pictures with tasks-->
 				<?php
-					echo '<a-marker ';
-					echo 'type="pattern" url="Markers/MarkerFile/pattern-T.patt" id="markerT" ';
-					echo 'raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">';
-					echo '<a-entity ';
-					echo 'id="Tentity" class="clickable" material="src:#Tasktexture;shader:flat;" geometry="primitive:plane; height:2; width:2;" gesture-handler ';
-					echo 'position="0 0 0" rotation="-90 0 0 ">';
-					echo '</a-entity>';
-					echo '</a-marker>';
+					$sql = 'SELECT * FROM ControlData';
+					if ($result = mysqli_query($conn, $sql)) {
+						while ($row = mysqli_fetch_assoc($result)) {
+							$markerLetterUpperCase = $row['MarkerArea'][0];
+							$XPos = $row['XPos'];
+							$YPos = $row['YPos'];
+							echo '<a-marker ';
+							echo 'type="pattern" url="Markers/MarkerFile/pattern-'.$markerLetterUpperCase.'.patt" id="marker'.$markerLetterUpperCase.'" ';
+							echo 'raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">';
+							echo '<a-entity ';
+							echo 'id="Tentity" class="clickable" material="src:#Tasktexture;shader:flat;" geometry="primitive:plane; height:2; width:2;" gesture-handler ';
+							echo 'position="'.$XPos.' 0 '.$YPos.'" rotation="-90 0 0 ">';
+							echo '</a-entity>';
+							echo '</a-marker>';
+						}
+					}
+					
 				?>
 			<!-- <a-marker type="pattern" url="Markers/MarkerFile/pattern-T.patt" raycaster="objects: .clickable" 
 				emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerT">
@@ -75,16 +84,16 @@
 			</a-marker> -->
 
 			<!-- Marker A is the marker for Pictures with Answers or Hints-->
-			<a-marker type="pattern" url="Markers/MarkerFile/pattern-A.patt" id="markerA">
+			<!-- <a-marker type="pattern" url="Markers/MarkerFile/pattern-A.patt" id="markerA">
 				<a-video id="Aentity" src="#Prerecordedvid" width="3" height="3"
 					position="0 0 0" rotation="-90 0 0" webkit-playsinline playsinline></a-video>
 			</a-marker>
-			<!-- Marker M is the marker for Models and Helpful Infographics-->
+				//Marker M is the marker for Models and Helpful Infographics
 			<a-marker type="pattern" url="Markers/MarkerFile/pattern-M.patt" raycaster="objects: .clickable" 
 				emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerM">
 				<a-entity id="Mentity" mixin="normal" animation="property: rotation; to: 360 0 0; loop: true; dur: 10000" 
 					obj-model="obj: #3dobj;" class="clickable" gesture-handler></a-entity>
-			</a-marker>
+			</a-marker> -->
 			<a-entity camera></a-entity>
 		</a-scene>
 	</body>
