@@ -46,7 +46,7 @@
 					mysqli_free_result($result);
 				}
 			?>
-			<!--<img id="Tasktexture" src="materials/imgs/IMG_0287.png" style="width:100%;">
+			<!--<img id="Tasktexture" src="materials/imgs/BaseBinary-HexProblem1.png" style="width:100%;">
 			<img id="Answertexture" src="materials/imgs/BaseBinary-HexProblem1TransparentANS.png" style="width:100%;">
 			<img id="Modeltexture" src="materials/imgs/BaseBinary-HexProblem1.png" style="width:100%;">-->
 			<video id="Prerecordedvid" autoplay loop="true" src="materials/videos/Digital.mp4"></video>
@@ -57,10 +57,23 @@
 			renderer="antialias: true; alpha: true; precision: medium; logarithmicDepthBuffer: true;" 
 			vr-mode-ui="enabled: false;" gesture-detector id="scene">
 			<!-- Marker T is the marker for Pictures with tasks-->
-			<a-marker type="pattern" url="Markers/MarkerFile/pattern-T.patt" id="markerT">
-				<a-entity id="Tentity" geometry="primitive:plane;height:2;width:2;"
-					position="2 0 .5" rotation="-90 0 0" material="src:#Tasktexture;shader:flat;"></a-entity>
-			</a-marker>
+				<?php
+					echo '<a-marker ';
+					echo 'type="pattern" url="Markers/MarkerFile/pattern-T.patt" id="markerT" ';
+					echo 'raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">';
+					echo '<a-entity ';
+					echo 'id="Tentity" class="clickable" material="src:#Tasktexture;shader:flat;" geometry="primitive:plane; height:2; width:2;" gesture-handler ';
+					echo 'position="0 0 0" rotation="-90 0 0 ">';
+					echo '</a-entity>';
+					echo '</a-marker>';
+				?>
+			<!-- <a-marker type="pattern" url="Markers/MarkerFile/pattern-T.patt" raycaster="objects: .clickable" 
+				emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerT">
+				<a-entity id="Tentity" geometry="primitive:plane;height:2;width:2;" raycaster="objects: .clickable" 
+				emitevents="true" cursor="fuse: false; rayOrigin: mouse;"
+					position="0 0 0" rotation="-90 0 0" material="src:#Tasktexture;shader:flat;" class="clickable" gesture-handler></a-entity>
+			</a-marker> -->
+
 			<!-- Marker A is the marker for Pictures with Answers or Hints-->
 			<a-marker type="pattern" url="Markers/MarkerFile/pattern-A.patt" id="markerA">
 				<a-video id="Aentity" src="#Prerecordedvid" width="3" height="3"
