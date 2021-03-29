@@ -175,6 +175,10 @@
                                 <div class="jumbotron" style="height:570px;">
                                     <h6 id="aAreaHeader">Gallery</h6>
                                     
+									<div id="gallery">
+									
+									</div>
+									
                                 </div>
                             </div>
                         </div>
