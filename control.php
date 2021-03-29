@@ -125,7 +125,7 @@
         <form action="" method="post" enctype="multipart/form-data">
             <div class="container-fluid h-100" id="mainWorkspaceDiv">
                 <div class="row" id="mainWorkspace" style="margin-bottom:20px;">
-                    <div class="col-sm-4 align-self-center" id="leftControl">
+                    <div class="col-sm-4 align-self-center" id="leftControl" style="display:none;">
                         <div class="card">
                             <div class="card-header">
                                 <h6>Controls</h6>
@@ -136,84 +136,74 @@
                                 <p></p>
                                 <p><b>Task Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisTask" name="xAxisTask">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask" name="xAxisTask">
                                     <p id="xValTask"></p>
-									<input type="range" min="-5" max="5" value="0" class="slider" id="yAxisTask" name="yAxisTask">
+									<input type="range" min="-128" max="127" value="0" class="slider" id="yAxisTask" name="yAxisTask">
 									<p id="yValTask"></p>
                                 </div>
 								<hr class="solid"><br>
-                                <p><b>Display Hint:</b></p>
-                                <input onclick="displayToggle('hintToggle')" type="checkbox" class="btn btn-danger" id="hintToggle" value="Off" name="hintToggle">
+                                <p><b>Display Answer:</b></p>
+                                <input onclick="displayToggle('answerToggle')" type="checkbox" class="btn btn-danger" id="answerToggle" value="Off" name="answerToggle">
                                 <p></p>
                                 <p><b>Hint Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisAns" name="xAxisAns">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisAns" name="xAxisAns">
 									<p id="xValAns"></p>
-                                    <input type="range" min="-5" max="5" value="0" class="slider" id="yAxisAns" name="yAxisAns">
+                                    <input type="range" min="-128" max="127" value="0" class="slider" id="yAxisAns" name="yAxisAns">
 									<p id="yValAns"></p>
 								</div>
-								<hr class="solid"><br>
-                                <p><b>Display Model:</b></p>
-                                <input onclick="displayToggle('modelToggle')" type="checkbox" class="btn btn-danger" id="modelToggle" value="Off" name="modelToggle">
-                                <p></p>
-                                <p><b>Model Position:</b></p>
-                                <div class="slidecontainer">
-                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisMod" name="xAxisMod">
-									<p id="xValMod"></p>
-                                    <input type="range" min="-5" max="5" value="0" class="slider" id="yAxisMod" name="yAxisMod">
-									<p id="yValMod"></p>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-8 align-self-center" id="markerSpace">
+                    <div class="col-sm-12 align-self-center" id="markerSpace">
                         <div class="row" id="topMarkers">
                             <div class="col-sm-6 align-self-center" id="tMarker">
                                 <div class="jumbotron">
-                                    <h6 id="tAreaHeader">TASK MARKER AREA</h6>
+                                    <h6 id="tAreaHeader">TASK IMAGE</h6>
                                     <span id="tCenter">
-                                        <h3>No file selected</h3>
+										<img src="" style="width:400px;height:400px;background-color:black;margin:20px;">
                                     </span>
                                     <div class="btn btn-group" id=tMarkButtons>
-                                        <input type="button" class="btn btn-secondary" onclick="chooseExisting('tCenter')" id="taskUpload" value="Choose Existing">
                                             <?php uploadFile($_FILES['taskUploadFile'], 'task')?>
                                             <form action="" method="POST" enctype="multipart/form-data">
                                                 <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile" name="taskUploadFile"></span>
-                                                <input type="submit" class="btn btn-success" value="Upload">
                                             </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 align-self-center" id="aMarker">
-                                <div class="jumbotron">
-                                    <h6 id="aAreaHeader">HINT MARKER AREA</h6>
-                                    <span id="aCenter">
-                                        <h3>No file selected</h3>
-                                    </span>
-                                    <div class="btn btn-group" id=aMarkButtons>
-                                        <input type="button" class="btn btn-secondary" onclick="chooseExisting('aCenter')" id="answerUpload" value="Choose Existing">
-                                            <?php uploadFile($_FILES['answerUploadFile'], 'answer')?>
-                                            <form action="" method="POST" enctype="multipart/form-data">
-                                                <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('answerUploadFile', 'aCenter', 'aImage')" id="answerUploadFile" name="answerUploadFile"></span>
-                                                <input type="submit" class="btn btn-success" value="Upload">
-                                            </form>
-                                    </div>
+                                <div class="jumbotron" style="height:570px;">
+                                    <h6 id="aAreaHeader">Gallery</h6>
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 align-self-center" id="mMarker">
                                 <div class="jumbotron">
-                                    <h6 id="mAreaHeader">MODEL MARKER AREA</h6>
+                                    <h6 id="mAreaHeader">MODEL</h6>
                                     <span id="mCenter">
-                                        <h3>No file selected</h3>
+									<div class="row">	
+								
+										<div style="margin:auto;">
+										<img src="" style="width:700px;height:500px;background-color:black;margin:20px;">
+										</div>
+										
+									<div style="margin:auto;">
+										<p><b>Model Position:</b></p>
+									<div class="slidecontainer">
+										<input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod" name="xAxisMod">
+										<p id="xValMod"></p>
+										<input type="range" min="-128" max="127" value="0" class="slider" id="yAxisMod" name="yAxisMod">
+										<p id="yValMod"></p>
+									</div>
+									</div>
+									</div>
                                     </span>
                                     <div class="btn btn-group" id=mMarkButtons>
-                                        <input type="button" class="btn btn-secondary" onclick="chooseExisting('mCenter')" id="modelUpload" value="Choose Existing">
                                             <?php uploadFile($_FILES['modelUploadFile'], 'model')?>
                                             <form action="" method="POST" enctype="multipart/form-data">
                                                 <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('modelUploadFile', 'mCenter', 'mImage')" id="modelUploadFile" name="modelUploadFile"></span>
-                                                <input type="submit" class="btn btn-success" value="Upload">
                                             </form>
                                     </div>
                                 </div>
