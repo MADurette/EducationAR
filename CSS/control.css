@@ -77,3 +77,40 @@ h4 {
 hr.solid {
   border-top: 3px solid #555;
 }
+
+#gallery{
+	padding:20px;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	max-height:100%;
+}
+
+.galimg{
+	background-color:rgba(0,0,0,0);
+	margin:10px;
+	border:none;
+}
+
+.galimg img{
+	width:100px;
+	height:100px;
+	background-color:rgba(0,0,0,0);
+	padding:0;
+	margin:0;
+}
+
+.galimg img:hover{
+	border:4px solid #fff;
+}
+
+.galimg img:active{
+	border:4px solid #00FF00;
+}
+
+.galimg img:focus{
+	border:4px solid #00FF00;
+}
+
+.galact img{
+	border:4px solid #00FF00;
+}

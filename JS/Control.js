@@ -88,3 +88,15 @@ function uploadFile(markerArea, center, image) {
   // TODO -- Push file to wherever files are stored for students to view
   //
 }
+
+function GalleryFill(array){
+	for(i=0;i<array.length;i++){
+		if(array[i] != document.getElementById("taskimg").src){
+			document.getElementById("gallery").innerHTML += "<button class=\"galimg\"><img src=\"" + array[i] + "\"></button>";
+		}else{
+			document.getElementById("gallery").innerHTML += "<button class=\"galimg galact\"><img src=\"" + array[i] + "\"></button>";
+		}
+	}
+}
+
+

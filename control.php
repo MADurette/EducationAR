@@ -161,7 +161,7 @@
                                 <div class="jumbotron">
                                     <h6 id="tAreaHeader">TASK IMAGE</h6>
                                     <span id="tCenter">
-										<img src="" style="width:400px;height:400px;background-color:black;margin:20px;">
+										<img id="taskimg" src="" style="width:400px;height:400px;background-color:black;margin:20px;">
                                     </span>
                                     <div class="btn btn-group" id=tMarkButtons>
                                             <?php uploadFile($_FILES['taskUploadFile'], 'task')?>
@@ -174,8 +174,13 @@
                             <div class="col-sm-6 align-self-center" id="aMarker">
                                 <div class="jumbotron" style="height:570px;">
                                     <h6 id="aAreaHeader">Gallery</h6>
-                                    
+									
 									<div id="gallery">
+									
+									<script>
+									galimages=["Materials/Imgs/BaseBinary-HexProblem1.png","Materials/Imgs/BaseBinary-HexProblem1Transparent.png"];
+									GalleryFill(galimages);
+									</script>
 									
 									</div>
 									
