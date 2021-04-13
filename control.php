@@ -176,7 +176,7 @@
                                     <h6 id="galleryHeader">GALLERY</h6>
                                     <div id="gallery">
                                         <script>
-                                            galimages=["Materials/Imgs/BaseBinary-HexProblem1.png","Materials/Imgs/BaseBinary-HexProblem1Transparent.png"];
+                                            galimages=["materials/imgs/BaseBinary-HexProblem1.png","materials/imgs/BaseBinary-HexProblem1Transparent.png"];
                                             GalleryFill(galimages);
                                         </script>
                                     </div>
