@@ -39,7 +39,7 @@ h4 {
     left: 15px;
 }
 
-#tAreaHeader, #aAreaHeader, #mAreaHeader {
+#tAreaHeader, #galleryHeader, #mAreaHeader {
     position: absolute;
     top: 10px;
     margin-bottom: 0;

@@ -50,7 +50,6 @@
             }
 
             move_uploaded_file($fileName['tmp_name'], 'materials/imgs/'.$fileName['name']);
-            //TODO -- MAKE WRITING TO THE DATABASE WORK
             $sql = "INSERT INTO DisplayFiles (name, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType');";
             if (mysqli_query($conn, $sql)) {
             } else {
@@ -62,7 +61,8 @@
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
-    }}
+        }
+    }
     
         function postData() {
             global $conn;
@@ -171,19 +171,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 align-self-center" id="aMarker">
+                            <div class="col-sm-6 align-self-center" id="galleryContainer">
                                 <div class="jumbotron" style="height:570px;">
-                                    <h6 id="aAreaHeader">Gallery</h6>
-									
-									<div id="gallery">
-									
-									<script>
-									galimages=["Materials/Imgs/BaseBinary-HexProblem1.png","Materials/Imgs/BaseBinary-HexProblem1Transparent.png"];
-									GalleryFill(galimages);
-									</script>
-									
-									</div>
-									
+                                    <h6 id="galleryHeader">GALLERY</h6>
+                                    <div id="gallery">
+                                        <script>
+                                            galimages=["Materials/Imgs/BaseBinary-HexProblem1.png","Materials/Imgs/BaseBinary-HexProblem1Transparent.png"];
+                                            GalleryFill(galimages);
+                                        </script>
+                                    </div>
                                 </div>
                             </div>
                         </div>
