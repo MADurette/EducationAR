@@ -70,6 +70,7 @@ function displayToggle(toggleID) {
   }
 }
 
+//Originally used to display newly uploaded image
 function uploadFile(markerArea, center, image) {
   var file = document.getElementById(markerArea).files[0];
   var span = document.getElementById(center);
@@ -79,14 +80,20 @@ function uploadFile(markerArea, center, image) {
   img.src = URL.createObjectURL(file);
 }
 
-var taskImg = document.getElementById("taskimg").src;
 function GalleryFill(array) {
-  for (i = 0; i < array.length; i++) {
-    if (array[i] != taskImg) {
-      document.getElementById("gallery").innerHTML += "<button class=\"galimg\"><img src=\"" + array[i] + "\" onclick=\"uploadFile('taskUploadFile', 'tCenter', 'tImage')\"></button>";
-    } else {
-      document.getElementById("gallery").innerHTML += "<button class=\"galimg galact\"><img src=\"" + array[i] + "\" onclick=\"uploadFile('taskUploadFile', 'tCenter', 'tImage')\"></button>";
-    }
+  for (i = array.length - 1; i >= 0; i--) {
+    document.getElementById("gallery").innerHTML += "<button class='galimg'><img src='" + array[i] + "' onclick=showSelectedFile(\'" + array[i] + "\')></button>";
   }
 }
 
+var singleSelectedFile; //Stores last file that was clicked from the gallery
+//Fills in the current display with the selected image from the gallery
+function showSelectedFile(input) {
+  console.log(input);
+  var span = document.getElementById('tCenter');
+  var imgHTML = '<img src="" class="img-fluid" height "400" id="tImage">';
+  span.innerHTML = imgHTML;
+  var img = document.getElementById('tImage');
+  img.src = input;
+  singleSelectedFile = input;
+}

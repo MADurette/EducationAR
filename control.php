@@ -106,9 +106,6 @@
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
         $arraySize = count($imgNameArray);
-        // for ($i = 0; $i < $arraySize; $i++) {
-        //     echo '<p>' . $i . '</p><p>' . $imgNameArray[$i] . '</p><br>'; 
-        // }
         return $imgNameArray;
     }
 ?>
@@ -137,8 +134,8 @@
             2) "TOP" TASK & ANSWER MARKER CONTROL AREAS
             3) RIGHTHAND CONTROL PANEL
             4) "BOTTOM" MODEL MARKER CONTROL AREA-->
-        <?php postData()?>
-        <form action="" method="post" enctype="multipart/form-data">
+        <?php //postData()?>
+        <!--<form action="" method="post" enctype="multipart/form-data">-->
             <div class="container-fluid h-100" id="mainWorkspaceDiv">
                 <div class="row" id="mainWorkspace" style="margin-bottom:20px;">
                     <div class="col-sm-4 align-self-center" id="leftControl" style="display:none;">
@@ -175,27 +172,28 @@
                         <div class="row" id="topMarkers">
                             <div class="col-sm-6 align-self-center" id="galleryContainer">
                                 <div class="jumbotron" style="height:570px;">
-                                    <h6 id="galleryHeader">GALLERY</h6>
+                                    <h6 id="galleryHeader">MARKER IMAGE GALLERY</h6>
                                     <div id="gallery">
                                         <script>
                                             var array = <?php echo json_encode(getGalleryInfo()); ?>;
                                             GalleryFill(array);
-                                            </script>
+                                        </script>
                                     </div>
+                                    <?php uploadFile($_FILES['taskUploadFile'], 'task')?>
+                                    <form action="control.php" method="POST" enctype="multipart/form-data">
+                                    <div class="btn btn-group" role="group" aria-label="Basic example">
+                                        <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile" name="taskUploadFile"></span>
+                                        <button type="submit" class="btn btn-success" id="Submit">Upload</button>
+                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-sm-6 align-self-center" id="tMarker">
                                 <div class="jumbotron">
-                                    <h6 id="tAreaHeader">TASK IMAGE</h6>
+                                    <h6 id="tAreaHeader">CURRENT MARKER IMAGE</h6>
                                     <span id="tCenter">
                                         <img id="taskimg" src="" style="width:400px;height:400px;background-color:black;margin:20px;">
                                     </span>
-                                    <div class="btn btn-group" id=tMarkButtons>
-                                            <?php uploadFile($_FILES['taskUploadFile'], 'task')?>
-                                            <form action="" method="POST" enctype="multipart/form-data">
-                                                <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile" name="taskUploadFile"></span>
-                                            </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -236,6 +234,6 @@
                     </div>
                 </div>
             </div>
-        </form>
+       <!--</form>-->
     </body>
 </html>
