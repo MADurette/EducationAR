@@ -50,7 +50,7 @@
             }
 
             move_uploaded_file($fileName['tmp_name'], 'materials/imgs/'.$fileName['name']);
-            $sql = "INSERT INTO DisplayFiles (name, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType');";
+            $sql = "INSERT INTO DisplayFiles (fileName, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType');";
             if (mysqli_query($conn, $sql)) {
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -64,50 +64,66 @@
         }
     }
     
-        function postData() {
-            global $conn;
-            // Get all inputs from form
-            $taskToggle = $_REQUEST['taskToggle'];
-            $xAxisTask = $_REQUEST['xAxisTask'];
-            $yAxisTask = $_REQUEST['yAxisTask'];
-            $answerToggle = $_REQUEST['answerToggle'];
-            $xAxisAns = $_REQUEST['xAxisAns'];
-            $yAxisAns = $_REQUEST['yAxisAns'];
-            $modelToggle = $_REQUEST['modelToggle'];
-            $xAxisMod = $_REQUEST['xAxisMod'];
-            $yAxisMod = $_REQUEST['yAxisMod'];
+    // Handles pushing data to server database upon user submission
+    function postData() {
+        global $conn;
+        // Get all inputs from form
+        $taskToggle = $_REQUEST['taskToggle'];
+        $xAxisTask = $_REQUEST['xAxisTask'];
+        $yAxisTask = $_REQUEST['yAxisTask'];
+        $answerToggle = $_REQUEST['answerToggle'];
+        $xAxisAns = $_REQUEST['xAxisAns'];
+        $yAxisAns = $_REQUEST['yAxisAns'];
+        $modelToggle = $_REQUEST['modelToggle'];
+        $xAxisMod = $_REQUEST['xAxisMod'];
+        $yAxisMod = $_REQUEST['yAxisMod'];
 
-            $sql = "UPDATE ControlData SET DisplayToggle = '$taskToggle', XPos = '$xAxisTask', YPos = '$yAxisTask' WHERE MarkerArea = 'task';";
-            if (mysqli_query($conn, $sql)) {
+        $sql = "UPDATE ControlData SET XPos = '$xAxisTask', YPos = '$yAxisTask' WHERE MarkerArea = 'task';";
+        if (mysqli_query($conn, $sql)) {
 
-            } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-            $sql = "UPDATE ControlData SET DisplayToggle = '$answerToggle', XPos = '$xAxisAns', YPos = '$yAxisAns' WHERE MarkerArea = 'answer';";
-            if (mysqli_query($conn, $sql)) {
-
-            } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-            $sql = "UPDATE ControlData SET DisplayToggle = '$modelToggle', XPos = '$xAxisMod', YPos = '$yAxisMod' WHERE MarkerArea = 'model';";
-            if (mysqli_query($conn, $sql)) {
-
-            } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
+        $sql = "UPDATE ControlData SET XPos = '$xAxisMod', YPos = '$yAxisMod' WHERE MarkerArea = 'model';";
+        if (mysqli_query($conn, $sql)) {
+
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+
+    // Pulls names of images from DB and stores them in an array
+    function getGalleryInfo() {
+        global $conn;
+
+        $imgNameArray = [];
+        $sql = "SELECT fileName, filePath FROM DisplayFiles;";
+        if ($result = mysqli_query($conn, $sql)) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                array_push($imgNameArray, $row['filePath'] . $row['fileName']);
+            }
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+        $arraySize = count($imgNameArray);
+        // for ($i = 0; $i < $arraySize; $i++) {
+        //     echo '<p>' . $i . '</p><p>' . $imgNameArray[$i] . '</p><br>'; 
+        // }
+        return $imgNameArray;
+    }
 ?>
 
 <!DOCTYPE html>
 
 <html lang="en">
+    
     <head>
         <meta charset="utf-8">
         <title>ARPS: Instructor Control Panel</title>
         <link rel="shortcut icon" href="" type="image/x-icon">
         <link rel="stylesheet" href="./CSS/bootstrap.min.css">
         <link rel="stylesheet" href="./CSS/control.css">
-        <script src="./JS/control.js" async></script>
+        <script src="./JS/control.js"></script>
     </head>
     <body>
         <!--TOP "ARPS: INSTRUCTOR CONTROL PANEL" BAR-->
@@ -157,28 +173,28 @@
                     </div>
                     <div class="col-sm-12 align-self-center" id="markerSpace">
                         <div class="row" id="topMarkers">
+                            <div class="col-sm-6 align-self-center" id="galleryContainer">
+                                <div class="jumbotron" style="height:570px;">
+                                    <h6 id="galleryHeader">GALLERY</h6>
+                                    <div id="gallery">
+                                        <script>
+                                            var array = <?php echo json_encode(getGalleryInfo()); ?>;
+                                            GalleryFill(array);
+                                            </script>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-sm-6 align-self-center" id="tMarker">
                                 <div class="jumbotron">
                                     <h6 id="tAreaHeader">TASK IMAGE</h6>
                                     <span id="tCenter">
-										<img id="taskimg" src="" style="width:400px;height:400px;background-color:black;margin:20px;">
+                                        <img id="taskimg" src="" style="width:400px;height:400px;background-color:black;margin:20px;">
                                     </span>
                                     <div class="btn btn-group" id=tMarkButtons>
                                             <?php uploadFile($_FILES['taskUploadFile'], 'task')?>
                                             <form action="" method="POST" enctype="multipart/form-data">
                                                 <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile" name="taskUploadFile"></span>
                                             </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 align-self-center" id="galleryContainer">
-                                <div class="jumbotron" style="height:570px;">
-                                    <h6 id="galleryHeader">GALLERY</h6>
-                                    <div id="gallery">
-                                        <script>
-                                            galimages=["materials/imgs/BaseBinary-HexProblem1.png","materials/imgs/BaseBinary-HexProblem1Transparent.png"];
-                                            GalleryFill(galimages);
-                                        </script>
                                     </div>
                                 </div>
                             </div>

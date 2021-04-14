@@ -66,10 +66,7 @@ CREATE TABLE `DisplayFiles` (
 INSERT INTO `DisplayFiles` (`id`, `fileName`, `extension`, `filePath`, `projectionType`, `sequenceNum`) VALUES
 (1, 'BaseBinary-HexProblem1.png', 'png', '/materials/imgs/', 'marker', NULL),
 (2, 'BaseBinary-HexProblem1Transparent.png', 'png', 'materials/imgs/', 'marker', NULL),
-(3, 'BaseBinary-HexProblem1TransparentANS.png', 'png', '/materials/imgs/', 'marker', NULL),
-(4, 'dna.mtl', 'mtl', '/materials/models/', 'marker', NULL),
-(5, 'dna.obj', 'obj', '/materials/models', 'marker', NULL),
-(6, 'Digital.mp4', 'mp4', '/materials/videos/', 'marker', NULL);
+(3, 'BaseBinary-HexProblem1TransparentANS.png', 'png', '/materials/imgs/', 'marker', NULL);
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

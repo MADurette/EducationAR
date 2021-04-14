@@ -70,33 +70,23 @@ function displayToggle(toggleID) {
   }
 }
 
-function chooseExisting(center) {
-  //
-  // TODO -- Let user choose file from existing set of files, then display
-  //
-  console.log('Working on ' + center);
-}
-
 function uploadFile(markerArea, center, image) {
   var file = document.getElementById(markerArea).files[0];
   var span = document.getElementById(center);
   var imgHTML = '<img src="" class="img-fluid" height="300" id="' + image + '">';
   span.innerHTML = imgHTML;
   var img = document.getElementById(image);
-  img.src = URL.createObjectURL(file); // TODO -- find how to restore file name and store
-  //
-  // TODO -- Push file to wherever files are stored for students to view
-  //
+  img.src = URL.createObjectURL(file);
 }
 
-function GalleryFill(array){
-	for(i=0;i<array.length;i++){
-		if(array[i] != document.getElementById("taskimg").src){
-			document.getElementById("gallery").innerHTML += "<button class=\"galimg\"><img src=\"" + array[i] + "\"></button>";
-		}else{
-			document.getElementById("gallery").innerHTML += "<button class=\"galimg galact\"><img src=\"" + array[i] + "\"></button>";
-		}
-	}
+var taskImg = document.getElementById("taskimg").src;
+function GalleryFill(array) {
+  for (i = 0; i < array.length; i++) {
+    if (array[i] != taskImg) {
+      document.getElementById("gallery").innerHTML += "<button class=\"galimg\"><img src=\"" + array[i] + "\" onclick=\"uploadFile('taskUploadFile', 'tCenter', 'tImage')\"></button>";
+    } else {
+      document.getElementById("gallery").innerHTML += "<button class=\"galimg galact\"><img src=\"" + array[i] + "\" onclick=\"uploadFile('taskUploadFile', 'tCenter', 'tImage')\"></button>";
+    }
+  }
 }
-
 
