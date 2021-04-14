@@ -43,6 +43,7 @@
             }
             */
 
+
             if ($fileName['name'] != 0) {
                 echo $uploadErrors[$_FILES['taskUploadFile']['name']];
             } else if ($extensiontError) {
@@ -56,11 +57,25 @@
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
 
-            $sql = "UPDATE ControlData SET Source = 'materials/imgs/$name' WHERE MarkerArea = '$projectionType';";
-            if (mysqli_query($conn, $sql)) {
-            } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
+            // $sql = "UPDATE ControlData SET Source = 'materials/imgs/$name' WHERE MarkerArea = '$projectionType';";
+            // if (mysqli_query($conn, $sql)) {
+            // } else {
+            //     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            // }
+        }
+    }
+
+    //Simply pushes the currently selected file on the right card to be displayed
+    function pushFile($projectionType) {
+        global $conn;
+
+        $fileName = $_REQUEST['src'];
+
+        $sql = "UPDATE ControlData SET Source = '$fileName' WHERE MarkerArea = '$projectionType';";
+        if (mysqli_query($conn, $sql)) {
+            
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
     }
     
@@ -179,9 +194,9 @@
                                             GalleryFill(array);
                                         </script>
                                     </div>
-                                    <?php uploadFile($_FILES['taskUploadFile'], 'task')?>
-                                    <form action="control.php" method="POST" enctype="multipart/form-data">
-                                    <div class="btn btn-group" role="group" aria-label="Basic example">
+                                    <?php uploadFile($_FILES['taskUploadFile'], 'task'); ?>
+                                    <form action="" method="POST" enctype="multipart/form-data">
+                                    <div class="btn btn-group" role="group" id="tMarkButtons">
                                         <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile" name="taskUploadFile"></span>
                                         <button type="submit" class="btn btn-success" id="Submit">Upload</button>
                                     </div>
@@ -191,9 +206,17 @@
                             <div class="col-sm-6 align-self-center" id="tMarker">
                                 <div class="jumbotron">
                                     <h6 id="tAreaHeader">CURRENT MARKER IMAGE</h6>
-                                    <span id="tCenter">
-                                        <img id="taskimg" src="" style="width:400px;height:400px;background-color:black;margin:20px;">
-                                    </span>
+                                    <?php pushFile('Task'); ?>
+                                    <form action="" method="POST" enctype="multipart/form-data">
+                                        <span id="tCenter">
+                                            <img id="taskimg" src="" style="width:400px;height:400px;margin:20px;">
+                                        </span>
+                                        <div class="btn btn-group" role="group" id="pushMarkerButtons">
+                                            <button class="btn btn-primary" id="sequencePrev"><</button>
+                                            <button class="btn btn-primary" id="sequenceNext">></button>
+                                            <button type="submit" class="btn btn-success" id="pushMarkerFile">Push Image</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

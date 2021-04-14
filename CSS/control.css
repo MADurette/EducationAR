@@ -33,7 +33,7 @@ h4 {
     height: 100%;
 }
 
-#tMarkButtons, #aMarkButtons, #mMarkButtons {
+#tMarkButtons, #aMarkButtons, #mMarkButtons, #pushMarkerButtons {
     position: absolute;
     bottom: 40px;
     left: 15px;
@@ -50,7 +50,7 @@ h4 {
 }
 
 .img-fluid {
-    max-height: 300px;
+    max-height: 400px;
 }
 
 .btn-file {

@@ -91,9 +91,10 @@ var singleSelectedFile; //Stores last file that was clicked from the gallery
 function showSelectedFile(input) {
   console.log(input);
   var span = document.getElementById('tCenter');
-  var imgHTML = '<img src="" class="img-fluid" height "400" id="tImage">';
+  var imgHTML = '<img src="" class="img-fluid" id="taskimg" style="width:400px;height:400px;margin:20px;">';
   span.innerHTML = imgHTML;
-  var img = document.getElementById('tImage');
+  var img = document.getElementById('taskimg');
   img.src = input;
+  img.value = input;
   singleSelectedFile = input;
 }
