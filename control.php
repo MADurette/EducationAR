@@ -31,7 +31,6 @@
                 8 => 'Something else stopped the upload'
             );
             $name = $_FILES['taskUploadFile']['name']; // Just gives the name of the file, used for writing to database
-        
             //$extensiontError = false;       // Can be implemented when we figure out what files shouldn't go in
             //$extensions = array();
             $fileExtension = explode('.', $fileName);
@@ -53,15 +52,10 @@
             move_uploaded_file($fileName['tmp_name'], 'materials/imgs/'.$fileName['name']);
             $sql = "INSERT INTO DisplayFiles (fileName, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType');";
             if (mysqli_query($conn, $sql)) {
+                echo "Uploaded successfully. Refresh page to see & select " . $name;
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
-
-            // $sql = "UPDATE ControlData SET Source = 'materials/imgs/$name' WHERE MarkerArea = '$projectionType';";
-            // if (mysqli_query($conn, $sql)) {
-            // } else {
-            //     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            // }
         }
     }
 
@@ -69,7 +63,7 @@
     function pushFile($projectionType) {
         global $conn;
 
-        $fileName = $_REQUEST['src'];
+        $fileName = $_POST['srcToPush'];
 
         $sql = "UPDATE ControlData SET Source = '$fileName' WHERE MarkerArea = '$projectionType';";
         if (mysqli_query($conn, $sql)) {
@@ -196,10 +190,10 @@
                                     </div>
                                     <?php uploadFile($_FILES['taskUploadFile'], 'task'); ?>
                                     <form action="" method="POST" enctype="multipart/form-data">
-                                    <div class="btn btn-group" role="group" id="tMarkButtons">
-                                        <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="uploadFile('taskUploadFile', 'tCenter', 'tImage')" id="taskUploadFile" name="taskUploadFile"></span>
-                                        <button type="submit" class="btn btn-success" id="Submit">Upload</button>
-                                    </div>
+                                        <div class="btn btn-group" role="group" id="tMarkButtons">
+                                            <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="taskUploadFile" name="taskUploadFile"></input></span>
+                                            <button type="submit" class="btn btn-success" id="Submit">Upload</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -211,6 +205,7 @@
                                         <span id="tCenter">
                                             <img id="taskimg" src="" style="width:400px;height:400px;margin:20px;">
                                         </span>
+                                        <input type="hidden" id="srcToPush" name="srcToPush" value="">
                                         <div class="btn btn-group" role="group" id="pushMarkerButtons">
                                             <button class="btn btn-primary" id="sequencePrev"><</button>
                                             <button class="btn btn-primary" id="sequenceNext">></button>
@@ -251,9 +246,9 @@
                                 </div>
                             </div>
                         </div>
-						<div class="text-center">
+						<!-- <div class="text-center">
 							<button type="submit" class="btn btn-success" id="masterSubmit higher">Submit</button>
-						</div>
+						</div> -->
                     </div>
                 </div>
             </div>

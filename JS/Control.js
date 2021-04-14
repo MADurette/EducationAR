@@ -80,16 +80,25 @@ function uploadFile(markerArea, center, image) {
   img.src = URL.createObjectURL(file);
 }
 
+//Displays name of file to upload next to upload button. 
+function prepUploadFile() {
+  var file = document.getElementById("taskUploadFile").value;
+  var res = file.split("\\");
+  file = res[res.length - 1];
+  var target = document.getElementById("Submit");
+  console.log(target);
+  target.innerHTML = "Upload: " + file;
+}
+
 function GalleryFill(array) {
   for (i = array.length - 1; i >= 0; i--) {
     document.getElementById("gallery").innerHTML += "<button class='galimg'><img src='" + array[i] + "' onclick=showSelectedFile(\'" + array[i] + "\')></button>";
   }
 }
 
-var singleSelectedFile; //Stores last file that was clicked from the gallery
-//Fills in the current display with the selected image from the gallery
 function showSelectedFile(input) {
   console.log(input);
+  //CHANGES CURRENT DISPLAYED MARKER IMAGE
   var span = document.getElementById('tCenter');
   var imgHTML = '<img src="" class="img-fluid" id="taskimg" style="width:400px;height:400px;margin:20px;">';
   span.innerHTML = imgHTML;
@@ -97,4 +106,8 @@ function showSelectedFile(input) {
   img.src = input;
   img.value = input;
   singleSelectedFile = input;
+
+  //CHANGES SRCTOPUSH FOR WHEN PUSH OCCURS
+  var hiddenInput = document.getElementById("srcToPush");
+  hiddenInput.value = input;
 }
