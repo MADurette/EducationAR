@@ -1,48 +1,48 @@
-window.onload = function () {
-    document.querySelector(".hint-button").addEventListener("click", function () {
-            // here you can change also a-scene or a-entity properties, like
-            // changing your 3D model source, size, position and so on
-            // or you can just open links, trigger actions...
-            alert("Hint Box");
-        });
-}
+// window.onload = function () {
+//     document.querySelector(".hint-button").addEventListener("click", function () {
+//             // here you can change also a-scene or a-entity properties, like
+//             // changing your 3D model source, size, position and so on
+//             // or you can just open links, trigger actions...
+//             alert("Hint Box");
+//         });
+// }
 
-function loaddata() {
-    var name = document.getElementById("username");
-    if (name) {
-        $.ajax({
-            type: 'post',
-            url: 'Config/loaddata.php',
-            data: {
-                user_name: name,
-            },
-            success: function (response) {
-                // We get the element having id of display_info and put the response inside it
-                InsertData(response);
-            }
-        });
-    }
-    else {
-        console.log("Error loading data from Database");
-    }
-}
+// function loaddata() {
+//     var name = document.getElementById("username");
+//     if (name) {
+//         $.ajax({
+//             type: 'post',
+//             url: 'Config/loaddata.php',
+//             data: {
+//                 user_name: name,
+//             },
+//             success: function (response) {
+//                 // We get the element having id of display_info and put the response inside it
+//                 InsertData(response);
+//             }
+//         });
+//     }
+//     else {
+//         console.log("Error loading data from Database");
+//     }
+// }
 
-function InsertData(data) {
-    document.getElementById("Tasktexture").src = "";
-    document.getElementById("Answertexture").src = "";
-    document.getElementById("Modeltexture").src = "";
-    document.getElementById("3dobj").src = "";
-    document.getElementById("Prerecordedvid").src = "";
-    document.getElementById("Aentity").position = "";
-    document.getElementById("Tentity").position = "";
-    document.getElementById("Mentity").position = "";
-    document.getElementById("Aentity").scale = "";
-    document.getElementById("Tentity").scale = "";
-    document.getElementById("Mentity").scale = "";
-    document.getElementById("Aentity").animation = "";
-    document.getElementById("Tentity").animation = "";
-    document.getElementById("Mentity").animation = "";
-}
+// function InsertData(data) {
+//     document.getElementById("Tasktexture").src = "";
+//     document.getElementById("Answertexture").src = "";
+//     document.getElementById("Modeltexture").src = "";
+//     document.getElementById("3dobj").src = "";
+//     document.getElementById("Prerecordedvid").src = "";
+//     document.getElementById("Aentity").position = "";
+//     document.getElementById("Tentity").position = "";
+//     document.getElementById("Mentity").position = "";
+//     document.getElementById("Aentity").scale = "";
+//     document.getElementById("Tentity").scale = "";
+//     document.getElementById("Mentity").scale = "";
+//     document.getElementById("Aentity").animation = "";
+//     document.getElementById("Tentity").animation = "";
+//     document.getElementById("Mentity").animation = "";
+// }
 
 // document.addEventListener("DOMContentLoaded", function (event) {
 //     var scene = document.querySelector("a-scene");
@@ -74,14 +74,17 @@ function InsertData(data) {
 //})
 
 //---------------------------------------------------------------  
+//DEPRECATED CODE, NO LONGER FIT NEW SPECS
+
 var xStart = null;                                                        
-var yStart = null;   
-document.addEventListener('touchstart', initializeSwipe, false);   
+var yStart = null;  
+var posDelta = .12; 
+document.addEventListener('touchstart', originalPos, false);   
 document.addEventListener('touchmove', moveImage, false);
 document.addEventListener('touchend', resetRotation, false);
 
 //Get original press location
-function initializeSwipe(event) {
+function originalPos(event) {
     xStart = event.touches[0].clientX;
     yStart = event.touches[0].clientY;
 }
@@ -91,39 +94,41 @@ function moveImage(event) {
     setTimeout(null, 10);
     if (xStart == 0 || yStart == 0) {
         var rotLock = document.getElementById('Tentity').getAttribute('rotation');
-        console.log(rotLock);
         rotLock.x = -90;
         rotLock.y = 0;
         document.getElementById('Tentity').setAttribute('rotation', rotLock);
         return;
     }
+    
     var rotLock = document.getElementById('Tentity').getAttribute('rotation');
-    console.log(rotLock);
     rotLock.x = -90;
     rotLock.y = 0;
-
+    document.getElementById('Tentity').setAttribute('rotation', rotLock);
+    
     var xNew = event.touches[0].clientX;                                    
     var yNew = event.touches[0].clientY;
     var xDiff = xStart - xNew;
     var yDiff = yStart - yNew;
-
-    if (Math.abs( xDiff ) > Math.abs( yDiff )) {
-        if (xDiff > 0 ) {
-            /* left swipe */
+    
+    var position = document.getElementById('Tentity').getAttribute('position');
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+            position.x -= posDelta;
             console.log("LEFT");
         } else {
-            /* right swipe */
+            position.x += posDelta;
             console.log("RIGHT");
         }                       
     } else {
-        if (yDiff > 0 ) {
-            /* up swipe */ 
+        if (yDiff > 0) {
+            position.z -= posDelta; 
             console.log("UP");
         } else {
-            /* down swipe */
+            position.z += posDelta;
             console.log("DOWN");
         }                                                                 
     } 
+    document.getElementById('Tentity').setAttribute('position', position);
     rotLock.x = -90;
     rotLock.y = 0;
     document.getElementById('Tentity').setAttribute('rotation', rotLock);
