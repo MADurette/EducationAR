@@ -74,35 +74,38 @@ function InsertData(data) {
 //})
 
 //---------------------------------------------------------------  
-var xDown = null;                                                        
-var yDown = null;   
+var xStart = null;                                                        
+var yStart = null;   
 document.addEventListener('touchstart', initializeSwipe, false);   
 document.addEventListener('touchmove', moveImage, false);
 document.addEventListener('touchend', resetRotation, false);
 
+//Get original press location
 function initializeSwipe(event) {
-    xDown = event.touches[0].clientX;
-    yDown = event.touches[0].clientY;
+    xStart = event.touches[0].clientX;
+    yStart = event.touches[0].clientY;
 }
 
+//MODIFIED FROM https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
 function moveImage(event) {
-    if (xDown == 0 || yDown == 0) {
+    setTimeout(null, 10);
+    if (xStart == 0 || yStart == 0) {
         var rotLock = document.getElementById('Tentity').getAttribute('rotation');
         console.log(rotLock);
         rotLock.x = -90;
         rotLock.y = 0;
+        document.getElementById('Tentity').setAttribute('rotation', rotLock);
         return;
     }
-    console.log("MOVING");
     var rotLock = document.getElementById('Tentity').getAttribute('rotation');
     console.log(rotLock);
     rotLock.x = -90;
     rotLock.y = 0;
 
-    var xUp = event.touches[0].clientX;                                    
-    var yUp = event.touches[0].clientY;
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
+    var xNew = event.touches[0].clientX;                                    
+    var yNew = event.touches[0].clientY;
+    var xDiff = xStart - xNew;
+    var yDiff = yStart - yNew;
 
     if (Math.abs( xDiff ) > Math.abs( yDiff )) {
         if (xDiff > 0 ) {
@@ -120,15 +123,14 @@ function moveImage(event) {
             /* down swipe */
             console.log("DOWN");
         }                                                                 
-    }
-    xDown = null;
-    yDown = null;    
+    } 
     rotLock.x = -90;
     rotLock.y = 0;
     document.getElementById('Tentity').setAttribute('rotation', rotLock);
     console.log(rotLock);
 }
 
+//Double check rotation suppression on letup
 function resetRotation(event) {
     var rotLock = document.getElementById('Tentity').getAttribute("rotation");
     rotLock.x = -90;
