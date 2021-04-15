@@ -120,16 +120,14 @@
     // Gets the current image for that projection type from the ControlData table
     function getCurrentImage($projectionType) {
         global $conn;
-        $res;
         $sql = "SELECT Source FROM ControlData WHERE MarkerArea = '$projectionType';";
         if ($result = mysqli_query($conn, $sql)) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $res = $row['Source'];
+                echo $row['Source'];
             }
         } else {
             echo 'Something went wrong';
         }
-        return $res;
     }
 ?>
 
@@ -206,7 +204,7 @@
                                     <?php uploadFile($_FILES['taskUploadFile'], 'task'); ?>
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         <div class="btn btn-group" role="group" id="tMarkButtons">
-                                            <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="taskUploadFile" name="taskUploadFile"></input></span>
+                                            <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="taskUploadFile" name="taskUploadFile" accept="image/png, image/jpg"></span>
                                             <button type="submit" class="btn btn-success" id="Submit">Upload</button>
                                         </div>
                                     </form>
@@ -218,9 +216,9 @@
                                     <?php pushFile('Task'); ?>
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         <span id="tCenter">
-                                            <img src="<?php getCurrentImage('Task') ?>" class="img-fluid" id="taskimg" style="width:400px;height:400px;margin:20px;">
+                                            <img src="<?php getCurrentImage('Task');?>" class="img-fluid" id="taskimg" style="width:400px;height:400px;margin:20px;">
                                         </span>
-                                        <input type="hidden" id="srcToPush" name="srcToPush" value="">
+                                        <input type="hidden" id="srcToPush" name="srcToPush" value="<?php getCurrentImage('Task');?>">
                                         <div class="btn btn-group" role="group" id="pushMarkerButtons">
                                             <button class="btn btn-primary" id="sequencePrev"><</button>
                                             <button class="btn btn-primary" id="sequenceNext">></button>

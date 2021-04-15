@@ -58,15 +58,9 @@ function displayToggle(toggleID) {
   if (toggle.value == "Off") {
     toggle.value = "On";
     toggle.className = "btn btn-success";
-    //
-    // TODO -- Allow marker content to be displayed on AR projection
-    //
   } else {
     toggle.value = "Off";
     toggle.className = "btn btn-danger";
-    //
-    // TODO -- Stop displaying marker content on AR projection
-    //
   }
 }
 
