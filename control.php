@@ -64,7 +64,6 @@
         global $conn;
 
         $fileName = $_POST['srcToPush'];
-
         $sql = "UPDATE ControlData SET Source = '$fileName' WHERE MarkerArea = '$projectionType';";
         if (mysqli_query($conn, $sql)) {
             
@@ -116,6 +115,21 @@
         }
         $arraySize = count($imgNameArray);
         return $imgNameArray;
+    }
+
+    // Gets the current image for that projection type from the ControlData table
+    function getCurrentImage($projectionType) {
+        global $conn;
+        $res;
+        $sql = "SELECT Source FROM ControlData WHERE MarkerArea = '$projectionType';";
+        if ($result = mysqli_query($conn, $sql)) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $res = $row['Source'];
+            }
+        } else {
+            echo 'Something went wrong';
+        }
+        return $res;
     }
 ?>
 
@@ -184,6 +198,7 @@
                                     <h6 id="galleryHeader">MARKER IMAGE GALLERY</h6>
                                     <div id="gallery">
                                         <script>
+                                            //FILLS GALLERY WITH EVERYTHING IN DISPLAYFILES TABLE
                                             var array = <?php echo json_encode(getGalleryInfo()); ?>;
                                             GalleryFill(array);
                                         </script>
@@ -203,7 +218,7 @@
                                     <?php pushFile('Task'); ?>
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         <span id="tCenter">
-                                            <img id="taskimg" src="" style="width:400px;height:400px;margin:20px;">
+                                            <img src="<?php getCurrentImage('Task') ?>" class="img-fluid" id="taskimg" style="width:400px;height:400px;margin:20px;">
                                         </span>
                                         <input type="hidden" id="srcToPush" name="srcToPush" value="">
                                         <div class="btn btn-group" role="group" id="pushMarkerButtons">

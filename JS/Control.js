@@ -86,7 +86,6 @@ function prepUploadFile() {
   var res = file.split("\\");
   file = res[res.length - 1];
   var target = document.getElementById("Submit");
-  console.log(target);
   target.innerHTML = "Upload: " + file;
 }
 
