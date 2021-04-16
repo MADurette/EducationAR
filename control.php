@@ -35,7 +35,7 @@
 
             $name = $file['name'];
             $extension = pathinfo($name, PATHINFO_EXTENSION);
-            $path = '/materials/imgs/';
+            $path = '/materials/imgs/'; //Could be changed to check for file type, and store it in appropriate folder, but we only need images
 
             if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $path . $name)) {
                 $sql = "INSERT INTO DisplayFiles (fileName, extension, filepath, projectiontype) VALUES ('$name', '$extension', '$path', '$projectionType');";
@@ -182,7 +182,7 @@
                                     <form action="" method="POST" enctype="multipart/form-data">
                                     <div class="btn btn-group" role="group" id="markerButtons">
                                         <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="markerUploadFile" name="markerUploadFile" accept="image/png, image/jpeg, image/jpg"></span>
-                                        <button type="submit" class="btn btn-success" id="markerSubmit">Upload</button> <!-- TODO: INITIALIZE AS DISABLED, ENABLE WHEN THERE IS A FILE -->
+                                        <button type="submit" class="btn btn-success disabled" id="markerSubmit" disabled>Upload: No Image Chosen</button> <!-- TODO: INITIALIZE AS DISABLED, ENABLE WHEN THERE IS A FILE -->
                                         </div>
                                     </form>
                                 </div>
@@ -193,14 +193,14 @@
                                     <?php pushFile('Marker', NULL); //Second variable NULL because it is only needed for auidence projection?>
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         <span id="markerCenter">
-                                            <img src="<?php getCurrentImage('Marker');?>" class="img-fluid" id="markerImg" style="width:400px;height:400px;margin:20px;">
+                                            <img src="<?php getCurrentImage('Marker');?>" class="img-fluid" id="markerImg" style="width:400px;height:400px;margin:20px;" onload="getOldImage()">
                                         </span>
                                         <input type="hidden" id="srcToPush" name="markerSrcToPush" value="<?php getCurrentImage('Marker');?>">
                                         <div class="btn btn-group" role="group" id="pushMarkerButtons">
                                             <!-- <button class="btn btn-primary" id="sequencePrev"><</button>
                                             <button class="btn btn-primary" id="sequenceNext">></button> -->
                                             <!-- Used for stepping through a sequence of images, not implemented -->
-                                            <button type="submit" class="btn btn-success" id="pushMarkerFile">Push Image</button>
+                                            <button type="submit" class="btn btn-success disabled" id="pushMarkerFile" disabled>Push Image</button>
                                         </div>
                                     </form>
                                 </div>
@@ -232,7 +232,7 @@
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         <div class="btn btn-group" id=AudienceButtons>
                                             <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="uploadFile('audienceUploadFile', 'audienceImgHolder', 'audienceImg')" id="audienceUploadFile" name="audienceUploadFile"></span>
-                                            <button class="btn btn-success" id="modelSubmit">Upload & Push</button>
+                                            <button class="btn btn-success disabled" id="modelSubmit" disabled>Upload & Push: No Image Chosen</button>
                                         </div>
                                     </form>
                                 </div>

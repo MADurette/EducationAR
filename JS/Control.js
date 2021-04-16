@@ -68,7 +68,7 @@ function displayToggle(toggleID) {
 */
 //ABOVE DEPRECATED.
 
-//Originally used to display newly uploaded image
+//Originally used to display newly uploaded image, now only does so for audience image
 function uploadFile(markerArea, center, image) {
   var file = document.getElementById(markerArea).files[0];
   var span = document.getElementById(center);
@@ -76,9 +76,24 @@ function uploadFile(markerArea, center, image) {
   span.innerHTML = imgHTML;
   var img = document.getElementById(image);
   img.src = URL.createObjectURL(file);
+  var uploadButton = document.getElementById("modelSubmit");
+  console.log(uploadButton)
+  if (uploadButton.disabled) {
+    console.log("enabling");
+    uploadButton.className = "btn btn-success";
+    uploadButton.disabled = false;
+  }
+}
+
+var oldImage;
+function getOldImage() {
+  oldImage = document.getElementById('markerImg').src;
+  var res = oldImage.split("/");
+  oldImage = res[res.length - 1];
 }
 
 function showSelectedFile(input) {
+  console.log("OLD: " + oldImage);
   console.log(input);
   //CHANGES CURRENT DISPLAYED MARKER IMAGE
   var span = document.getElementById('markerCenter');
@@ -87,6 +102,22 @@ function showSelectedFile(input) {
   var img = document.getElementById('markerImg');
   img.src = input;
   img.value = input;
+
+  //CHECK IF FILE WAS ALREADY PUSHED, ALLOW FOR PUSH ACCORDINGLY
+  var pushButton = document.getElementById('pushMarkerFile');
+  var forCheck = input.split("/");
+  forCheck = forCheck[forCheck.length - 1];
+  console.log("OLD IMAGE: " + oldImage + " FOR CHECK: " + forCheck);
+  if (forCheck != oldImage) {
+    //They are different, enable push
+    console.log("enabling");
+    pushButton.className = "btn btn-success";
+    pushButton.disabled = false;
+  } else {
+    //They are the same, disable push
+    pushButton.className = "btn btn-success disabled";
+    pushButton.disabled = true;
+  }
 
   //CHANGES SRCTOPUSH FOR WHEN PUSH OCCURS
   var hiddenInput = document.getElementById("srcToPush");
@@ -100,17 +131,28 @@ function changeModelFile() {
   var imgHTML = '<img src="" class="img-fluid" id="modelImg" style="height:500px;margin:20px;">';
   span.innerHTML = imgHTML;
   var img = document.getElementById('modelImg');
+
   img.src = URL.createObjectURL(input);
 }
 
 //Displays name of file to upload next to upload button. 
 function prepUploadFile() {
+  console.log("AWAWAWA");
   var file = document.getElementById("markerUploadFile").value;
   var res = file.split("\\");
   file = res[res.length - 1];
   var target = document.getElementById("markerSubmit");
+  console.log(file);
   target.innerHTML = "Upload: " + file;
+  console.log("I'm doing this");
+  if (target.disabled) {
+    console.log("enabling");
+    target.className = "btn btn-success";
+    target.disabled = false;
+  }
 }
+
+
 //------------==BUTTONS==------------//
 
 function GalleryFill(array) {
