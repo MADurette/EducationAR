@@ -33,7 +33,7 @@
                 8 => 'Something else stopped the upload'
             );
 
-            $name = $file['name'];
+            $name = str_replace(' ', '_', $file['name']);
             $extension = pathinfo($name, PATHINFO_EXTENSION);
             $path = '/materials/imgs/'; //Could be changed to check for file type, and store it in appropriate folder, but we only need images
 
@@ -250,8 +250,8 @@
         <script>
             //Stops form resubmission prompt
             //NOTE: DOES NOT WORK WITH SAFARI
-            if ( window.history.replaceState ) {                                        
-                window.history.replaceState( null, null, window.location.href );
+            if (window.history.replaceState) {                                        
+                window.history.replaceState(null, null, window.location.href);
             }
         </script>
     </footer>

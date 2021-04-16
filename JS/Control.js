@@ -36,20 +36,22 @@ ySliderA.oninput = function () {
 }
 */
 // MODEL PROJECTION X and Y positioning
-var xSliderM = document.getElementById("xAxisMod");
-var xOutputM = document.getElementById("xValMod");
-var ySliderM = document.getElementById("yAxisMod");
-var yOutputM = document.getElementById("yValMod");
+window.onload = function() {
+  xSliderM = document.getElementById("xAxisMod");
+  xOutputM = document.getElementById("xValMod");
+  ySliderM = document.getElementById("yAxisMod");
+  yOutputM = document.getElementById("yValMod");
+  xOutputM.innerHTML = "X Pos: " + xSliderM.value;
+  yOutputM.innerHTML = "Y Pos: " + ySliderM.value;
 
-xOutputM.innerHTML = "X Pos: " + xSliderM.value;
-yOutputM.innerHTML = "Y Pos: " + ySliderM.value;
 
-xSliderM.oninput = function () {
-  xOutputM.innerHTML = "X Pos: " + this.value;
-}
+  xSliderM.oninput = function () {
+    xOutputM.innerHTML = "X Pos: " + this.value;
+  }
 
-ySliderM.oninput = function () {
-  yOutputM.innerHTML = "Y Pos: " + this.value;
+  ySliderM.oninput = function () {
+    yOutputM.innerHTML = "Y Pos: " + this.value;
+  }
 }
 //------------==SLIDERS==------------//
 

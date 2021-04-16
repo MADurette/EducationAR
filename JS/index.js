@@ -79,6 +79,8 @@
 var xStart = null;                                                        
 var yStart = null;  
 var posDelta = .12; 
+var posLimit = 4;
+var posTolerance = .01;
 document.addEventListener('touchstart', originalPos, false);   
 document.addEventListener('touchmove', moveImage, false);
 document.addEventListener('touchend', resetRotation, false);
@@ -94,46 +96,68 @@ function originalPos(event) {
 //On every call to moveImage().
 function moveImage(event) {
     setTimeout(null, 10);
+    var entity = document.getElementById('Mentity');
+    var rotLock = entity.getAttribute('rotation');
     if (xStart == 0 || yStart == 0) {
-        var rotLock = document.getElementById('Mentity').getAttribute('rotation');
         rotLock.x = -90;
         rotLock.y = 0;
-        document.getElementById('Mentity').setAttribute('rotation', rotLock);
+        entity.setAttribute('rotation', rotLock);
         return;
     }
     
-    var rotLock = document.getElementById('Mentity').getAttribute('rotation');
     rotLock.x = -90;
     rotLock.y = 0;
-    document.getElementById('Mentity').setAttribute('rotation', rotLock);
+    entity.setAttribute('rotation', rotLock);
     
     var xNew = event.touches[0].clientX;                                    
     var yNew = event.touches[0].clientY;
     var xDiff = xStart - xNew;
     var yDiff = yStart - yNew;
     
-    var position = document.getElementById('Mentity').getAttribute('position');
+    var position = entity.getAttribute('position');
     if (Math.abs(xDiff) > Math.abs(yDiff)) {
         if (xDiff > 0) {
-            position.x -= posDelta;
-            console.log("LEFT");
+            if (Math.abs(position.x) < posLimit) {
+                position.x -= posDelta;
+                if (Math.abs(position.x) >= posLimit) {
+                    position.x = -Math.abs(posLimit) + posTolerance;
+                }
+                console.log("LEFT");
+            }
         } else {
-            position.x += posDelta;
-            console.log("RIGHT");
+            if (position.x < posLimit) {
+                position.x += posDelta;
+                if (position.x >= posLimit) {
+                    position.x = posLimit - posTolerance;
+                }
+                console.log("RIGHT");
+            }
+            
         }                       
     } else {
+        console.log(position.z);
         if (yDiff > 0) {
-            position.z -= posDelta; 
+            if (Math.abs(position.z) < posLimit) {
+                position.z -= posDelta; 
+                if (Math.abs(position.z) >= posLimit) {
+                    position.z = -Math.abs(posLimit) + posTolerance;
+                }
+            }
             console.log("UP");
         } else {
-            position.z += posDelta;
+            if (position.z < posLimit) {
+                position.z += posDelta;
+                if (position.z >= posLimit) {
+                    position.z = posLimit - posTolerance;
+                }
+            }
             console.log("DOWN");
         }                                                                 
     } 
-    document.getElementById('Mentity').setAttribute('position', position);
+    entity.setAttribute('position', position);
     rotLock.x = -90;
     rotLock.y = 0;
-    document.getElementById('Mentity').setAttribute('rotation', rotLock);
+    entity.setAttribute('rotation', rotLock);
     console.log(rotLock);
 }
 
