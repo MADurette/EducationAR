@@ -34,13 +34,13 @@
 //     document.getElementById("3dobj").src = "";
 //     document.getElementById("Prerecordedvid").src = "";
 //     document.getElementById("Aentity").position = "";
-//     document.getElementById("Tentity").position = "";
+//     document.getElementById("Mentity").position = "";
 //     document.getElementById("Mentity").position = "";
 //     document.getElementById("Aentity").scale = "";
-//     document.getElementById("Tentity").scale = "";
+//     document.getElementById("Mentity").scale = "";
 //     document.getElementById("Mentity").scale = "";
 //     document.getElementById("Aentity").animation = "";
-//     document.getElementById("Tentity").animation = "";
+//     document.getElementById("Mentity").animation = "";
 //     document.getElementById("Mentity").animation = "";
 // }
 
@@ -90,27 +90,29 @@ function originalPos(event) {
 }
 
 //MODIFIED FROM https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
+//Best answer. Uses same general logic to determine which way is being swiped on screen. Additionally resets rotation of image 
+//On every call to moveImage().
 function moveImage(event) {
     setTimeout(null, 10);
     if (xStart == 0 || yStart == 0) {
-        var rotLock = document.getElementById('Tentity').getAttribute('rotation');
+        var rotLock = document.getElementById('Mentity').getAttribute('rotation');
         rotLock.x = -90;
         rotLock.y = 0;
-        document.getElementById('Tentity').setAttribute('rotation', rotLock);
+        document.getElementById('Mentity').setAttribute('rotation', rotLock);
         return;
     }
     
-    var rotLock = document.getElementById('Tentity').getAttribute('rotation');
+    var rotLock = document.getElementById('Mentity').getAttribute('rotation');
     rotLock.x = -90;
     rotLock.y = 0;
-    document.getElementById('Tentity').setAttribute('rotation', rotLock);
+    document.getElementById('Mentity').setAttribute('rotation', rotLock);
     
     var xNew = event.touches[0].clientX;                                    
     var yNew = event.touches[0].clientY;
     var xDiff = xStart - xNew;
     var yDiff = yStart - yNew;
     
-    var position = document.getElementById('Tentity').getAttribute('position');
+    var position = document.getElementById('Mentity').getAttribute('position');
     if (Math.abs(xDiff) > Math.abs(yDiff)) {
         if (xDiff > 0) {
             position.x -= posDelta;
@@ -128,17 +130,17 @@ function moveImage(event) {
             console.log("DOWN");
         }                                                                 
     } 
-    document.getElementById('Tentity').setAttribute('position', position);
+    document.getElementById('Mentity').setAttribute('position', position);
     rotLock.x = -90;
     rotLock.y = 0;
-    document.getElementById('Tentity').setAttribute('rotation', rotLock);
+    document.getElementById('Mentity').setAttribute('rotation', rotLock);
     console.log(rotLock);
 }
 
 //Double check rotation suppression on letup
 function resetRotation(event) {
-    var rotLock = document.getElementById('Tentity').getAttribute("rotation");
+    var rotLock = document.getElementById('Mentity').getAttribute("rotation");
     rotLock.x = -90;
     rotLock.y = 0;
-    document.getElementById('Tentity').setAttribute('rotation', rotLock);
+    document.getElementById('Mentity').setAttribute('rotation', rotLock);
 }

@@ -14,12 +14,14 @@
         die("Connection failed: ".mysqli_connect_error());
     }
 
+    //----------------vv-------MARKER SPECIFIC FUNCTIONS--------vv-------------------//
+
     // Handles uploading new files to the server and their respective information to the DB
-    function uploadFile($fileName, $projectionType) {
+    function uploadFile($file, $projectionType) {
         global $conn;
         // Taken from https://www.youtube.com/watch?v=2jxM7IwpiXc
-        if (isset($fileName)) {
-             // List of errors that could come up when uploading, use print_r['taskUploadFile'] somewhere below to check for code
+        if (isset($file)) {
+            // List of errors that could come up when uploading, use print_r['taskUploadFile'] somewhere below to check for code
             $uploadErrors = array(
                 0 => 'Success',
                 1 => 'File is larger than specified size limit',
@@ -30,82 +32,54 @@
                 7 => 'Failed to write file to disk',
                 8 => 'Something else stopped the upload'
             );
-            $name = $_FILES['taskUploadFile']['name']; // Just gives the name of the file, used for writing to database
-            //$extensiontError = false;       // Can be implemented when we figure out what files shouldn't go in
-            //$extensions = array();
-            $fileExtension = explode('.', $fileName);
-            $fileExtension = end($fileExtension);
 
-            /*
-            if (!in_array($fileExtension, $extensions)) {   // Part of extension checking
-                $extensiontError = true;
+            $name = $file['name'];
+            $extension = pathinfo($name, PATHINFO_EXTENSION);
+            $path = '/materials/imgs/';
+
+            if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $path . $name)) {
+                $sql = "INSERT INTO DisplayFiles (fileName, extension, filepath, projectiontype) VALUES ('$name', '$extension', '$path', '$projectionType');";
+                if (mysqli_query($conn, $sql)) {
+                    echo "Uploaded successfully.";
+                    if ($projectionType == 'Marker') {
+                        echo " Re-enter page to see & select " . $name;
+                    } else {
+                        //In case of audience file upload, immediately push
+                        pushFile($projectionType, $path . $name);
+                    }
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+            } else {
+                echo "Error: Could not upload file to server";
             }
-            */
+            unset($file);
+        }
+    }
 
-
-            if ($fileName['name'] != 0) {
-                echo $uploadErrors[$_FILES['taskUploadFile']['name']];
-            } else if ($extensiontError) {
-                echo 'Invalid file extension';
-            }
-
-            move_uploaded_file($fileName['tmp_name'], 'materials/imgs/'.$fileName['name']);
-            $sql = "INSERT INTO DisplayFiles (fileName, extension, filepath, projectiontype) VALUES ('$name', '$fileExtension', 'materials/imgs/', '$projectionType');";
+    //Simply pushes the currently selected image to be displayed, either Marker or audience
+    function pushFile($projectionType, $forAudience) {
+        global $conn;
+        if ($projectionType == 'Marker') {
+            $fileName = $_POST['markerSrcToPush'];
+        } else {
+            $fileName = $forAudience;
+        }
+        if ($fileName != "") {
+            $sql = "UPDATE ControlData SET Source = '$fileName' WHERE MarkerArea = '$projectionType';";
             if (mysqli_query($conn, $sql)) {
-                echo "Uploaded successfully. Refresh page to see & select " . $name;
+                
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
         }
     }
 
-    //Simply pushes the currently selected file on the right card to be displayed
-    function pushFile($projectionType) {
-        global $conn;
-
-        $fileName = $_POST['srcToPush'];
-        $sql = "UPDATE ControlData SET Source = '$fileName' WHERE MarkerArea = '$projectionType';";
-        if (mysqli_query($conn, $sql)) {
-            
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-    }
-    
-    // Handles pushing data to server database upon user submission
-    function postData() {
-        global $conn;
-        // Get all inputs from form
-        $taskToggle = $_REQUEST['taskToggle'];
-        $xAxisTask = $_REQUEST['xAxisTask'];
-        $yAxisTask = $_REQUEST['yAxisTask'];
-        $answerToggle = $_REQUEST['answerToggle'];
-        $xAxisAns = $_REQUEST['xAxisAns'];
-        $yAxisAns = $_REQUEST['yAxisAns'];
-        $modelToggle = $_REQUEST['modelToggle'];
-        $xAxisMod = $_REQUEST['xAxisMod'];
-        $yAxisMod = $_REQUEST['yAxisMod'];
-
-        $sql = "UPDATE ControlData SET XPos = '$xAxisTask', YPos = '$yAxisTask' WHERE MarkerArea = 'task';";
-        if (mysqli_query($conn, $sql)) {
-
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-        $sql = "UPDATE ControlData SET XPos = '$xAxisMod', YPos = '$yAxisMod' WHERE MarkerArea = 'model';";
-        if (mysqli_query($conn, $sql)) {
-
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-    }
-
-    // Pulls names of images from DB and stores them in an array
+    // Pulls names of images for marker projection from DB and stores them in an array
     function getGalleryInfo() {
         global $conn;
-
         $imgNameArray = [];
-        $sql = "SELECT fileName, filePath FROM DisplayFiles;";
+        $sql = "SELECT fileName, filePath FROM DisplayFiles WHERE projectionType = 'Marker';";
         if ($result = mysqli_query($conn, $sql)) {
             while ($row = mysqli_fetch_assoc($result)) {
                 array_push($imgNameArray, $row['filePath'] . $row['fileName']);
@@ -116,6 +90,8 @@
         $arraySize = count($imgNameArray);
         return $imgNameArray;
     }
+
+    //--------------^^---------MARKER SPECIFIC FUNCTIONS---------^^------------------//
 
     // Gets the current image for that projection type from the ControlData table
     function getCurrentImage($projectionType) {
@@ -159,7 +135,7 @@
         <!--<form action="" method="post" enctype="multipart/form-data">-->
             <div class="container-fluid h-100" id="mainWorkspaceDiv">
                 <div class="row" id="mainWorkspace" style="margin-bottom:20px;">
-                    <div class="col-sm-4 align-self-center" id="leftControl" style="display:none;">
+                    <!-- <div class="col-sm-4 align-self-center" id="leftControl" style="display:none;">
                         <div class="card">
                             <div class="card-header">
                                 <h6>Controls</h6>
@@ -170,9 +146,9 @@
                                 <p></p>
                                 <p><b>Task Position:</b></p>
                                 <div class="slidecontainer">
-                                    <input type="range" min="-128" max="127" value="0" class="slider" id="xAxisTask" name="xAxisTask">
+                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisTask" name="xAxisTask">
                                     <p id="xValTask"></p>
-									<input type="range" min="-128" max="127" value="0" class="slider" id="yAxisTask" name="yAxisTask">
+									<input type="range" min="-5" max="5" value="0" class="slider" id="yAxisTask" name="yAxisTask">
 									<p id="yValTask"></p>
                                 </div>
 								<hr class="solid"><br>
@@ -188,7 +164,8 @@
 								</div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <!-- ^^DEPRECATED: ORIGINALLY ALLOWED FOR INSTRUCTOR TO MANIPULATE DISPLAYED IMAGES. NO LONGER MEETS CLIENT SPEC. -->
                     <div class="col-sm-12 align-self-center" id="markerSpace">
                         <div class="row" id="topMarkers">
                             <div class="col-sm-6 align-self-center" id="galleryContainer">
@@ -201,27 +178,28 @@
                                             GalleryFill(array);
                                         </script>
                                     </div>
-                                    <?php uploadFile($_FILES['taskUploadFile'], 'task'); ?>
+                                    <?php uploadFile($_FILES['markerUploadFile'], 'Marker'); ?>
                                     <form action="" method="POST" enctype="multipart/form-data">
-                                        <div class="btn btn-group" role="group" id="tMarkButtons">
-                                            <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="taskUploadFile" name="taskUploadFile" accept="image/png, image/jpg"></span>
-                                            <button type="submit" class="btn btn-success" id="Submit">Upload</button>
+                                    <div class="btn btn-group" role="group" id="markerButtons">
+                                        <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="markerUploadFile" name="markerUploadFile" accept="image/png, image/jpeg, image/jpg"></span>
+                                        <button type="submit" class="btn btn-success" id="markerSubmit">Upload</button> <!-- TODO: INITIALIZE AS DISABLED, ENABLE WHEN THERE IS A FILE -->
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="col-sm-6 align-self-center" id="tMarker">
+                            <div class="col-sm-6 align-self-center" id="markerDisplay">
                                 <div class="jumbotron">
-                                    <h6 id="tAreaHeader">CURRENT MARKER IMAGE</h6>
-                                    <?php pushFile('Task'); ?>
+                                    <h6 id="markerAreaHeader">CURRENT MARKER IMAGE</h6>
+                                    <?php pushFile('Marker', NULL); //Second variable NULL because it is only needed for auidence projection?>
                                     <form action="" method="POST" enctype="multipart/form-data">
-                                        <span id="tCenter">
-                                            <img src="<?php getCurrentImage('Task');?>" class="img-fluid" id="taskimg" style="width:400px;height:400px;margin:20px;">
+                                        <span id="markerCenter">
+                                            <img src="<?php getCurrentImage('Marker');?>" class="img-fluid" id="markerImg" style="width:400px;height:400px;margin:20px;">
                                         </span>
-                                        <input type="hidden" id="srcToPush" name="srcToPush" value="<?php getCurrentImage('Task');?>">
+                                        <input type="hidden" id="srcToPush" name="markerSrcToPush" value="<?php getCurrentImage('Marker');?>">
                                         <div class="btn btn-group" role="group" id="pushMarkerButtons">
-                                            <button class="btn btn-primary" id="sequencePrev"><</button>
-                                            <button class="btn btn-primary" id="sequenceNext">></button>
+                                            <!-- <button class="btn btn-primary" id="sequencePrev"><</button>
+                                            <button class="btn btn-primary" id="sequenceNext">></button> -->
+                                            <!-- Used for stepping through a sequence of images, not implemented -->
                                             <button type="submit" class="btn btn-success" id="pushMarkerFile">Push Image</button>
                                         </div>
                                     </form>
@@ -229,42 +207,52 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12 align-self-center" id="mMarker">
+                            <div class="col-sm-12 align-self-center" id="audienceMarker">
                                 <div class="jumbotron">
-                                    <h6 id="mAreaHeader">MODEL</h6>
+                                    <h6 id="audienceAreaHeader">CURRENT AUDIENCE IMAGE</h6>
                                     <span id="mCenter">
-									<div class="row">	
-								
-										<div style="margin:auto;">
-										<img src="" style="width:700px;height:500px;background-color:black;margin:20px;">
-										</div>
-										
-									<div style="margin:auto;">
-										<p><b>Model Position:</b></p>
-									<div class="slidecontainer">
-										<input type="range" min="-128" max="127" value="0" class="slider" id="xAxisMod" name="xAxisMod">
-										<p id="xValMod"></p>
-										<input type="range" min="-128" max="127" value="0" class="slider" id="yAxisMod" name="yAxisMod">
-										<p id="yValMod"></p>
-									</div>
-									</div>
-									</div>
+                                        <div class="row">	
+                                    
+                                            <div style="margin:auto;" id="audienceImgHolder">
+                                                <img src="<?php getCurrentImage('Audience');?>" class="img-fluid" id="audienceImg" style="width:400px;height:400px;margin:20px;">
+                                            </div>
+                                            
+                                            <div style="margin:auto;">
+                                                <p><b>Audience Image Position:</b></p>
+                                                <div class="slidecontainer">
+                                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisMod" name="xAxisMod">
+                                                    <p id="xValMod"></p>
+                                                    <input type="range" min="-5" max="5" value="0" class="slider" id="yAxisMod" name="yAxisMod">
+                                                    <p id="yValMod"></p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </span>
-                                    <div class="btn btn-group" id=mMarkButtons>
-                                            <?php uploadFile($_FILES['modelUploadFile'], 'model')?>
-                                            <form action="" method="POST" enctype="multipart/form-data">
-                                                <span class="btn btn-file btn-primary">Upload New<input type="file" oninput="uploadFile('modelUploadFile', 'mCenter', 'mImage')" id="modelUploadFile" name="modelUploadFile"></span>
-                                            </form>
-                                    </div>
+                                    <?php uploadFile($_FILES['audienceUploadFile'], 'Audience')?>
+                                    <form action="" method="POST" enctype="multipart/form-data">
+                                        <div class="btn btn-group" id=AudienceButtons>
+                                            <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="uploadFile('audienceUploadFile', 'audienceImgHolder', 'audienceImg')" id="audienceUploadFile" name="audienceUploadFile"></span>
+                                            <button class="btn btn-success" id="modelSubmit">Upload & Push</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
 						<!-- <div class="text-center">
 							<button type="submit" class="btn btn-success" id="masterSubmit higher">Submit</button>
 						</div> -->
-                    </div>
                 </div>
-            </div>
-       <!--</form>-->
+            </div> 
+       <!-- </form> -->
     </body>
+    <footer>
+        <script>
+            //Stops form resubmission prompt
+            //NOTE: DOES NOT WORK WITH SAFARI
+            if ( window.history.replaceState ) {                                        
+                window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
+    </footer>
 </html>

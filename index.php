@@ -30,28 +30,22 @@
 		<script src="./JS/index.js"></script>
 	</head>
 	<body style="margin : 0px; overflow: hidden;">
-		<div class="buttons">
-			<button class="hint-button" style="display:none;">Hints</button>
-		</div>
-		<div id="splash">
-			<div id="start-button">Click</div>
-		</div>
 		<a-assets>
 			<?php
 				$sql = 'SELECT * FROM ControlData';
 				if ($result = mysqli_query($conn, $sql)) {
 					while ($row = mysqli_fetch_assoc($result)) {
-						echo '<img id="' . $row['MarkerArea'] . 'texture" src="' . $row['Source'] . '" style="width:100%;">
-						';
+						echo '<img id="' . $row['MarkerArea'] . 'texture" src="' . $row['Source'] . '" style="width:100%;">';
 					}
 					mysqli_free_result($result);
 				}
 			?>
 			<!--<img id="Tasktexture" src="materials/imgs/BaseBinary-HexProblem1.png" style="width:100%;">
 			<img id="Answertexture" src="materials/imgs/BaseBinary-HexProblem1TransparentANS.png" style="width:100%;">
-			<img id="Modeltexture" src="materials/imgs/BaseBinary-HexProblem1.png" style="width:100%;">-->
+			<img id="Modeltexture" src="materials/imgs/BaseBinary-HexProblem1.png" style="width:100%;">
 			<video id="Prerecordedvid" autoplay loop="true" src="materials/videos/Digital.mp4"></video>
-			<a-asset-item id="3dobj" src="materials/models/dna.obj"></a-asset-item>
+			<a-asset-item id="3dobj" src="materials/models/dna.obj"></a-asset-item>-->
+			<!-- ^^DEPRECATED. INCLUDING 3D MODELS AND VIDEO DOES NOT MEET NEW CLIENT SPEC. -->
 			<a-mixin id="normal" scale=".05 .05 .05"></a-mixin>
 		</a-assets>
 		<a-scene embedded arjs="sourceType: webcam; patternRatio: 0.75 trackingMethod: best maxDetectionRate: 60 detectionMode: mono" 
@@ -66,10 +60,10 @@
 							$XPos = $row['XPos'];
 							$YPos = $row['YPos'];
 							echo '<a-marker ';
-							echo 'type="pattern" url="Markers/MarkerFile/pattern-'.$markerLetterUpperCase.'.patt" id="marker'.$markerLetterUpperCase.'" ';
+							echo 'type="pattern" url="Markers/MarkerFile/pattern-' . $markerLetterUpperCase . '.patt" id="marker' . $markerLetterUpperCase . '" ';
 							echo 'raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">';
 							echo '<a-entity ';
-							echo 'id="Tentity" class="clickable" material="src:#Tasktexture;shader:flat;" geometry="primitive:plane; height:2; width:2;" gesture-handler ';
+							echo 'id="' . $markerLetterUpperCase . 'entity" class="clickable" material="src:#' . $row['MarkerArea'] . 'texture;shader:flat;" geometry="primitive:plane; height:2; width:2;" gesture-handler ';
 							echo 'position="'.$XPos.' 0 '.$YPos.'" rotation="-90 0 0 ">';
 							echo '</a-entity>';
 							echo '</a-marker>';
@@ -95,6 +89,7 @@
 				<a-entity id="Mentity" mixin="normal" animation="property: rotation; to: 360 0 0; loop: true; dur: 10000" 
 					obj-model="obj: #3dobj;" class="clickable" gesture-handler></a-entity>
 			</a-marker> -->
+			<!-- ^^DEPRECATED. USE OF 3 MARKERS DOES NOT MEET NEW CLIENT SPEC. -->
 			<a-entity camera></a-entity>
 		</a-scene>
 	</body>
