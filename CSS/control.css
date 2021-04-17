@@ -39,6 +39,12 @@ h4 {
     left: 15px;
 }
 
+#markerRemoveButton {
+    position: absolute;
+    bottom: 47px;
+    right: 30px;
+}
+
 #galleryHeader, #markerAreaHeader, #audienceAreaHeader {
     position: absolute;
     top: 10px;

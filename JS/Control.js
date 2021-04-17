@@ -124,6 +124,14 @@ function showSelectedFile(input) {
   //CHANGES SRCTOPUSH FOR WHEN PUSH OCCURS
   var hiddenInput = document.getElementById("srcToPush");
   hiddenInput.value = input;
+
+  //RESET REMOVE IF IT'S BEEN POKED
+  var removeButton = document.getElementById("markerRemoveButton");
+  if (removeButton.getAttribute("type") == "submit") {
+    removeButton.setAttribute("type", "button");
+    removeButton.setAttribute("onclick", "prepRemove()");
+    removeButton.innerHTML = "Remove Image From Gallery";
+  }
 }
 
 function changeModelFile() {
@@ -139,7 +147,6 @@ function changeModelFile() {
 
 //Displays name of file to upload next to upload button. 
 function prepUploadFile() {
-  console.log("AWAWAWA");
   var file = document.getElementById("markerUploadFile").value;
   var res = file.split("\\");
   file = res[res.length - 1];
@@ -154,11 +161,20 @@ function prepUploadFile() {
   }
 }
 
+function prepRemove() {
+  var imageToRemove = document.getElementById("markerImg").getAttribute("src");
+  var hidden = document.getElementById("imageToRemove");
+  hidden.value = imageToRemove;
+  var changeButton = document.getElementById("markerRemoveButton");
+  setTimeout(function() {document.getElementById("markerRemoveButton").setAttribute("type", "submit");}, 100);
+  changeButton.setAttribute("onclick", "");
+  changeButton.innerHTML = "Press Again To Remove";
+}
 
 //------------==BUTTONS==------------//
 
 function GalleryFill(array) {
   for (i = array.length - 1; i >= 0; i--) {
-    document.getElementById("gallery").innerHTML += "<button class='galimg'><img src='" + array[i] + "' onclick=showSelectedFile(\'" + array[i] + "\')></button>";
+    document.getElementById("gallery").innerHTML += "<button class='galimg'><img src='" + array[i] + "' onclick=showSelectedFile(\'" + array[i] + "\') class=\'galimgsrc\' id=\'galimgsrc\'></button>";
   }
 }

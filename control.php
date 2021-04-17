@@ -99,6 +99,26 @@
         return $imgNameArray;
     }
 
+    function removeImage() {
+        global $conn;
+        $fileName = $_POST['imageToRemove'];
+        $fileName = str_replace("/materials/imgs/", "", $fileName);
+
+        if ($fileName != "") {
+            $sql = "DELETE FROM DisplayFiles WHERE fileName = '" . $fileName . "' LIMIT 1;";
+            if (mysqli_query($conn, $sql)) {
+                $sql = "UPDATE ControlData SET Source = '' WHERE MarkerArea = 'Marker';";
+                if (mysqli_query($conn, $sql)) {
+                    echo "Deletion successful. Refresh page to see deletion.";
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+        }
+    }
+
     //--------------^^---------MARKER SPECIFIC FUNCTIONS---------^^------------------//
 
     // Gets the current image for that projection type from the ControlData table
@@ -188,9 +208,9 @@
                                     </div>
                                     <?php uploadFile($_FILES['markerUploadFile'], 'Marker'); ?>
                                     <form action="" method="POST" enctype="multipart/form-data">
-                                    <div class="btn btn-group" role="group" id="markerButtons">
-                                        <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="markerUploadFile" name="markerUploadFile" accept="image/png, image/jpeg, image/jpg"></span>
-                                        <button type="submit" class="btn btn-success disabled" id="markerSubmit" disabled>Upload: No Image Chosen</button>
+                                        <div class="btn btn-group" role="group" id="markerButtons">
+                                            <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="markerUploadFile" name="markerUploadFile" accept="image/png, image/jpeg, image/jpg"></span>
+                                            <button type="submit" class="btn btn-success disabled" id="markerSubmit" disabled>Upload: No Image Chosen</button>
                                         </div>
                                     </form>
                                 </div>
@@ -210,6 +230,11 @@
                                             <!-- Used for stepping through a sequence of images, not implemented -->
                                             <button type="submit" class="btn btn-success disabled" id="pushMarkerFile" disabled>Push Image</button>
                                         </div>
+                                    </form>
+                                    <?php removeImage() ?>
+                                    <form action="" method="POST" enctype="multiplart/form-data">
+                                        <button type="button" class="btn btn-danger" id="markerRemoveButton" onclick="prepRemove()">Remove Image From Gallery</button>
+                                        <input type="hidden" id="imageToRemove" name="imageToRemove" value="">
                                     </form>
                                 </div>
                             </div>
