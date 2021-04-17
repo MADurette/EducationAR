@@ -44,7 +44,15 @@
                     if ($projectionType == 'Marker') {
                         echo " Re-enter page to see & select " . $name;
                     } else {
-                        //In case of audience file upload, immediately push
+                        //In case of audience file upload, immediately push, send image position
+                        $xAxis = $_POST['xAxisMod'];
+                        $yAxis = $_POST['yAxisMod'];
+                        $sql = "UPDATE ControlData SET XPos = '$xAxis', YPos = '$yAxis' WHERE MarkerArea = '$projectionType';";
+                        if (mysqli_query($conn, $sql)) {
+
+                        } else {
+                            echo " Re-enter page to see & select " . $name;
+                        }
                         pushFile($projectionType, $path . $name);
                     }
                 } else {
@@ -217,22 +225,22 @@
                                                 <img src="<?php getCurrentImage('Audience');?>" class="img-fluid" id="audienceImg" style="width:400px;height:400px;margin:20px;">
                                             </div>
                                             
+                                    <?php uploadFile($_FILES['audienceUploadFile'], 'Audience')?>
+                                    <form action="" method="POST" enctype="multipart/form-data">
                                             <div style="margin:auto;">
                                                 <p><b>Audience Image Position:</b></p>
                                                 <div class="slidecontainer">
-                                                    <input type="range" min="-5" max="5" value="0" class="slider" id="xAxisMod" name="xAxisMod">
+                                                    <input type="range" min="-4" max="4" value="0" class="slider" id="xAxisMod" name="xAxisMod">
                                                     <p id="xValMod"></p>
-                                                    <input type="range" min="-5" max="5" value="0" class="slider" id="yAxisMod" name="yAxisMod">
+                                                    <input type="range" min="-4" max="4" value="0" class="slider" id="yAxisMod" name="yAxisMod">
                                                     <p id="yValMod"></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </span>
-                                    <?php uploadFile($_FILES['audienceUploadFile'], 'Audience')?>
-                                    <form action="" method="POST" enctype="multipart/form-data">
                                         <div class="btn btn-group" id=AudienceButtons>
                                             <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="uploadFile('audienceUploadFile', 'audienceImgHolder', 'audienceImg')" id="audienceUploadFile" name="audienceUploadFile"></span>
-                                            <button class="btn btn-success disabled" id="modelSubmit" disabled>Upload & Push: No Image Chosen</button>
+                                            <button class="btn btn-success disabled" id="modelSubmit" disabled>Upload & Push</button>
                                         </div>
                                     </form>
                                 </div>

@@ -104,10 +104,6 @@ document.addEventListener('touchstart', originalPos, false);
 document.addEventListener('touchmove', moveImage, false);
 document.addEventListener('touchend', resetRotation, false);
 
-function awa() {
-    console.log("FOUND");
-}
-
 //Get original press location
 function originalPos(event) {
     xStart = event.touches[0].clientX;
