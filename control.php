@@ -190,7 +190,7 @@
                                     <form action="" method="POST" enctype="multipart/form-data">
                                     <div class="btn btn-group" role="group" id="markerButtons">
                                         <span class="btn btn-file btn-primary">Choose New<input type="file" oninput="prepUploadFile()" id="markerUploadFile" name="markerUploadFile" accept="image/png, image/jpeg, image/jpg"></span>
-                                        <button type="submit" class="btn btn-success disabled" id="markerSubmit" disabled>Upload: No Image Chosen</button> <!-- TODO: INITIALIZE AS DISABLED, ENABLE WHEN THERE IS A FILE -->
+                                        <button type="submit" class="btn btn-success disabled" id="markerSubmit" disabled>Upload: No Image Chosen</button>
                                         </div>
                                     </form>
                                 </div>
