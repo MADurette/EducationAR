@@ -60,7 +60,7 @@
 							$XPos = $row['XPos'];
 							$YPos = $row['YPos'];
 							echo '<a-marker ';
-							echo 'type="pattern" url="Markers/MarkerFile/pattern-' . $markerLetterUpperCase . '.patt" id="marker' . $markerLetterUpperCase . '" ';
+							echo 'type="pattern" url="Markers/MarkerFile/pattern-' . $markerLetterUpperCase . '.patt" id="' . $markerLetterUpperCase . 'marker" ';
 							echo 'raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">';
 							echo '<a-entity ';
 							echo 'id="' . $markerLetterUpperCase . 'entity" class="clickable" material="src:#' . $row['MarkerArea'] . 'texture;shader:flat;" geometry="primitive:plane; height:2; width:2;" gesture-handler ';

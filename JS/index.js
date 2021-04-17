@@ -75,7 +75,26 @@
 
 //---------------------------------------------------------------  
 //DEPRECATED CODE, NO LONGER FIT NEW SPECS
+var entityMarker;
+window.onload = function() {
+    var mMarkerRef = document.getElementById("Mmarker");
+    mMarkerRef.addEventListener("markerFound", (e)=>{
+        console.log("M FOUND");
+        entityMarker = "Mentity";
+    })
+    mMarkerRef.addEventListener("markerLost", (e)=>{
+        console.log("M LOST");
+    })
 
+    var aMarkerRef = document.getElementById("Amarker");
+    aMarkerRef.addEventListener("markerFound", (e)=>{
+        console.log("A FOUND");
+        entityMarker = "Aentity";
+    })
+    aMarkerRef.addEventListener("markerLost", (e)=>{
+        console.log("A LOST");
+    })
+}
 var xStart = null;                                                        
 var yStart = null;  
 var posDelta = .12; 
@@ -84,6 +103,10 @@ var posTolerance = .01;
 document.addEventListener('touchstart', originalPos, false);   
 document.addEventListener('touchmove', moveImage, false);
 document.addEventListener('touchend', resetRotation, false);
+
+function awa() {
+    console.log("FOUND");
+}
 
 //Get original press location
 function originalPos(event) {
@@ -96,7 +119,7 @@ function originalPos(event) {
 //On every call to moveImage().
 function moveImage(event) {
     setTimeout(null, 10);
-    var entity = document.getElementById('Mentity');
+    var entity = document.getElementById(entityMarker);
     var rotLock = entity.getAttribute('rotation');
     if (xStart == 0 || yStart == 0) {
         rotLock.x = -90;
