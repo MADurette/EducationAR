@@ -246,13 +246,13 @@
                                     <span id="mCenter">
                                         <div class="row">	
                                     
-                                            <div style="margin:auto;" id="audienceImgHolder">
+                                            <div style="margin-left:100px;margin-right:100px;" id="audienceImgHolder">
                                                 <img src="<?php getCurrentImage('Audience');?>" class="img-fluid" id="audienceImg" style="width:400px;height:400px;margin:20px;">
                                             </div>
                                             
                                     <?php uploadFile($_FILES['audienceUploadFile'], 'Audience')?>
                                     <form action="" method="POST" enctype="multipart/form-data">
-                                            <div style="margin:auto;">
+                                            <div id="positioningContainer">
                                                 <p><b>Audience Image Position:</b></p>
                                                 <div class="slidecontainer">
                                                     <input type="range" min="-4" max="4" value="0" class="slider" id="xAxisMod" name="xAxisMod">
