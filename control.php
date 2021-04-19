@@ -37,21 +37,42 @@
             $extension = pathinfo($name, PATHINFO_EXTENSION);
             $path = '/materials/imgs/'; //Could be changed to check for file type, and store it in appropriate folder, but we only need images
 
+            //Handle the upload of the image
             if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $path . $name)) {
+                //CHECK FOR IF AUDIENCE UPLOAD, IF SO, REMOVE ORIGINAL AUDIENCE UPLOAD FROM DATABASES AND SERVER
+                if ($projectionType == 'Audience') {
+                    //GET NAME OF ORIGINAL FILE IN AUDIENCE
+                    $sql = "SELECT Source FROM ControlData WHERE MarkerArea = 'Audience';";
+                    if ($result = mysqli_query($conn, $sql)) {
+                        if ($row = mysqli_fetch_assoc($result)) {
+                            $toDelete = getcwd() . $row['Source'];
+                        }
+                    } else {
+                        echo 'Error: could not find orignal audience file in server storage';
+                    }
+                    //DELETE ORIGINAL FILE FROM SERVER
+                    if (unlink($toDelete) == 0) {
+                        echo 'Error: Could not remove original audience file from server storage';
+                    }
+                    //REMOVE OLD IMAGE FROM DISPLAYFILES AND CONTROL DATA
+                    $sql = "DELETE FROM DisplayFiles WHERE projectionType = 'Audience';";
+                    mysqli_query($conn, $sql);
+                }
+                //INSERT NEW UPLOAD INTO DATABASE
                 $sql = "INSERT INTO DisplayFiles (fileName, extension, filepath, projectiontype) VALUES ('$name', '$extension', '$path', '$projectionType');";
                 if (mysqli_query($conn, $sql)) {
                     echo "Uploaded successfully.";
                     if ($projectionType == 'Marker') {
-                        echo " Re-enter page to see & select " . $name;
+                        echo " Re-enter page to see " . $name;
                     } else {
                         //In case of audience file upload, immediately push, send image position
                         $xAxis = $_POST['xAxisMod'];
                         $yAxis = $_POST['yAxisMod'];
-                        $sql = "UPDATE ControlData SET XPos = '$xAxis', YPos = '$yAxis' WHERE MarkerArea = '$projectionType';";
+                        $sql = "UPDATE ControlData SET Source = '" . $path . $file . "', XPos = '$xAxis', YPos = '$yAxis' WHERE MarkerArea = '$projectionType';";
                         if (mysqli_query($conn, $sql)) {
-
-                        } else {
                             echo " Re-enter page to see & select " . $name;
+                        } else {
+                            echo 'Error: Could not push file to ControlData';
                         }
                         pushFile($projectionType, $path . $name);
                     }
@@ -61,7 +82,6 @@
             } else {
                 echo "Error: Could not upload file to server";
             }
-            unset($file);
         }
     }
 
@@ -159,7 +179,7 @@
             2) "TOP" TASK & ANSWER MARKER CONTROL AREAS
             3) RIGHTHAND CONTROL PANEL
             4) "BOTTOM" MODEL MARKER CONTROL AREA-->
-        <?php //postData()?>
+        <?php //postData() //DEPRECATED. ORIGINAL USED TO FILL IN CONTROLS FOR MARKERS. DOESN'T FIT NEW SPEC. ?>
         <!--<form action="" method="post" enctype="multipart/form-data">-->
             <div class="container-fluid h-100" id="mainWorkspaceDiv">
                 <div class="row" id="mainWorkspace" style="margin-bottom:20px;">
