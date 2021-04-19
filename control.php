@@ -50,9 +50,21 @@
                     } else {
                         echo 'Error: could not find orignal audience file in server storage';
                     }
-                    //DELETE ORIGINAL FILE FROM SERVER
-                    if (unlink($toDelete) == 0) {
-                        echo 'Error: Could not remove original audience file from server storage';
+                    //DELETE ORIGINAL FILE FROM SERVER IF THAT IMAGES IS NOT ALSO USED FOR MARKER GALLERY
+                    $trip = false; //Is tripped if the name of the file we want to delete is also a file in the image gallery
+                    $sql = "SELECT fileName FROM DisplayFiles WHERE projectionType = 'Marker';";
+                    if ($result = mysqli_query($conn, $sql)) { 
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            if ($row['fileName'] == $name) {
+                                echo 'That file exists';
+                                $trip = true;
+                            }
+                        }
+                    }
+                    if ($trip == false) {
+                        if (unlink($toDelete) == 0) {
+                            echo 'Error: Could not remove original audience file from server storage';
+                        }
                     }
                     //REMOVE OLD IMAGE FROM DISPLAYFILES AND CONTROL DATA
                     $sql = "DELETE FROM DisplayFiles WHERE projectionType = 'Audience';";
